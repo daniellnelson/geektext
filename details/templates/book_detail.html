@@ -1,0 +1,16 @@
+<div>
+	<h3> {{book.title|capfirst }}</h3>
+	<p> {{book.author}}</p>
+	{%if book.genre%}
+		<p>Genre: {{book.genre}}</p>
+	{% endif %}
+	{%if book.condition%}
+		<p>Condition: {{book.condition}}</p>
+	{% endif %}
+	{%if book.type%}
+		<p>Format: {{book.type}}</p>
+	{% endif %}
+	<p>{{ book.publisher }}</p>
+	<p>Published on: {{book.published_date|date:"M D Y"}}</p>
+</div>
+

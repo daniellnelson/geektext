@@ -1,0 +1,14 @@
+<div>
+  {%for book in books%}
+  <div class="booktitle">
+    <a href="{%url 'book_detail' book.id%}">
+		<h3>{{ book.title|capfirst }}</h3>
+	</a>
+	<p>{{ book.author}}</p>
+	{%if book.genre %}
+	<p>Genre:{{ book.genre}}</p>
+	{% endif %}
+	<p class="hidden">{{book.condition }}</p>
+  </div>
+  {% endfor %}
+</div>
