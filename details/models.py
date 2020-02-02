@@ -10,4 +10,5 @@ class Book(models.Model):
     condition = models.CharField(choices=PURCHASE_CHOICES, max_length=1, blank=True)
     type = models.CharField(choices=BOOK_TYPE, max_length=1)
     published_date=models.DateTimeField()
+    cover = models.ImageField(upload_to='uploads/')
     

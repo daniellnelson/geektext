@@ -1,8 +1,26 @@
+ <div class="topnav"   float: center;
+  color: #2f4f4f;
+  text-align: center;
+  padding: 30px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family:roboto;>
+  <a class="active" href="https://github.com/daniellnelson/geektext">Github</a>
+  <a>Search</a>
+  <a>Sales Cart</a>
+  <a>Log In | Sign Up</a>
+  <a>Wish List</a>
+</div>
+
 <div>
+<ul>
   {%for book in books%}
   <div class="booktitle">
     <a href="{%url 'book_detail' book.id%}">
 		<h3>{{ book.title|capfirst }}</h3>
+	</a>
+	<a href="{%url 'book_detail' book.id%}">
+    <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
 	</a>
 	<p>{{ book.author}}</p>
 	{%if book.genre %}
@@ -11,4 +29,28 @@
 	<p class="hidden">{{book.condition }}</p>
   </div>
   {% endfor %}
+</ul>
 </div>
+
+topnav {
+  background-color: #8fbc8f;
+  overflow: hidden;
+}
+
+topnav a {
+  float: center;
+  color: #2f4f4f;
+  text-align: center;
+  padding: 30px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family:roboto;
+}
+topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+topnav a.active {
+  background-color: #dec985;
+  color: white;
+}
