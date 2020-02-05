@@ -1,0 +1,12 @@
+.logo {
+    color: red;
+}
+
+.booktitle {
+	 display:inline-block;
+}
+
+p {
+	color: red;
+	font-family: 'Lobster';
+}

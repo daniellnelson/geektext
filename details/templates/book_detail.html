@@ -1,6 +1,6 @@
 <div>
 	<h3> {{book.title|capfirst }}</h3>
-	<p> {{book.author}}</p>
+	<p>Written By: {{book.author}}</p>
 	{%if book.genre%}
 		<p>Genre: {{book.genre}}</p>
 	{% endif %}
@@ -12,5 +12,6 @@
 	{% endif %}
 	<p>{{ book.publisher }}</p>
 	<p>Published on: {{book.published_date|date:"M D Y"}}</p>
+	<p>Page Count: {{book.pages }}</p>
 </div>
 

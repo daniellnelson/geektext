@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_ROOT = '/home/danielnelson/django/geektext/details/static/css/'
 
 # Application definition
 

@@ -4,8 +4,11 @@
         <title>GeekText</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="stylesheet" href="{% static 'css/admin/css/details.css' %}">
 </head>
+<div class="logo">
+<h1>GeekText</h1>
+</div>
 <div class="topnav">
   <a>Home</a>
 <a>Search</a>
@@ -18,16 +21,16 @@
   {%for book in books%}
   <div class="booktitle">
     <a href="{%url 'book_detail' book.id%}">
-		<h1>{{ book.title|capfirst }}</h1>
 	</a>
 	<a href="{%url 'book_detail' book.id%}">
     <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
 	</a>
-	<p>{{ book.author}}</p>
+	<p>{{book.title}}</p>
+	<p>Written By: {{ book.author}}</p>
 	{%if book.genre %}
-	<p>Genre:{{ book.genre}}</p>
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
+	<p>Price: ${{ book.cost}}</p>
   </div>
   {% endfor %}
 </ul>
