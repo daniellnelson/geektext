@@ -1,12 +1,22 @@
 .logo {
-    color: red;
+    color: #C25100;
+	float: center;
+	margin-left: 750px;
+}
+
+.topnav {
+    color: #C25100;
+	float: center;
+	margin-left: 640px;
+	padding-bottom: 100px;
 }
 
 .booktitle {
 	 display:inline-block;
+	 margin-left: 50px;
 }
 
 p {
-	color: red;
+	color: black;
 	font-family: 'Lobster';
 }
