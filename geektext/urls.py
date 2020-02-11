@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
-    url(r'^profile/(\d+)/'. views.profile_detail, name = 'profile_detail'),
+    url(r'^profile/(\d+)/', views.profile_detail, name = 'profile_detail'),
 ]
 
 if settings.DEBUG: # new
