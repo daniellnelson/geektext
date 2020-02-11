@@ -5,4 +5,5 @@ def home(request):
     return HttpResponse('<p>PROFILE VIEW</p>')
 def profile_detail(request, id):
     return HttpResponse('<p>Profile with the id {}</p>'.format(id))
-    
+def book_detail (request, id):
+    pass
