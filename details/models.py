@@ -13,4 +13,7 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='uploads/')
     cost = models.FloatField(null=True, blank=True, default=None)
     pages = models.IntegerField(null=True, blank=True, default=None)
+    synopsis = models.CharField(max_length=1000, blank=True, null=True)
+    ISBN = models.CharField(max_length=25, blank=True, null=True)
+    dimensions = models.CharField(max_length=50, blank=True, null=True)
     
