@@ -6,12 +6,28 @@ from django.conf.urls import url
 
 from details import views
 from geekprofile import views as profile_views
+from django.urls import path, include
+
+from Shopping_cart import views as cart_views
+
+
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
+]
+
+
+# Cart Urls
+urlpatterns += [
+    path('cart/', cart_views.ListCart, name='list-carts'),
+    path('cart/<int:pk>/', cart_views.DetailCart.as_view(), name='detail-cart'),
+    path('cart/create/', cart_views.CreateCart.as_view(), name='create-cart'),
+    path('cart/<int:pk>/update/', cart_views.Updatecart.as_view(), name='update-cart'),
+    path('cart/<int:pk>/delete/', cart_views.DeleteCart.as_view(), name='delete-cart'), 
 ]
 
 if settings.DEBUG: # new
