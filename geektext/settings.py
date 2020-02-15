@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'details',
+<<<<<<< HEAD
     'wishlist',
+=======
+    'geekprofile',
+>>>>>>> a7306b9225fd11c26a900276e6720b2f511d1058
 ]
 
 MIDDLEWARE = [
