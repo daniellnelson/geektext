@@ -5,6 +5,7 @@ from django.conf.urls.static import static # new
 from django.conf.urls import url
 
 from details import views
+from wishlist import views as wishviews
 from geekprofile import views as profile_views
 from django.urls import path, include
 
@@ -17,6 +18,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
+    url(r'^wishlist/', wishviews.wish_list, name='wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
 ]
 
