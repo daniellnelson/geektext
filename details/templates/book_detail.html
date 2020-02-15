@@ -4,14 +4,25 @@
 	{%if book.genre%}
 		<p>Genre: {{book.genre}}</p>
 	{% endif %}
+	{%if book.synopsis%}
+		<p>Overview: {{book.synopsis}}</p>
+	{% endif %}
+	<p>{{ book.publisher }}</p>
+	<p>Published on: {{book.published_date|date:"M D Y"}}</p>
+	<p>Product Details</p>
+	<p> </p>
 	{%if book.condition%}
 		<p>Condition: {{book.condition}}</p>
 	{% endif %}
 	{%if book.type%}
 		<p>Format: {{book.type}}</p>
 	{% endif %}
-	<p>{{ book.publisher }}</p>
-	<p>Published on: {{book.published_date|date:"M D Y"}}</p>
 	<p>Page Count: {{book.pages }}</p>
+	{%if book.ISBN%}
+		<p>ISBN: {{book.ISBN}}</p>
+	{% endif %}
+	{%if book.dimensions%}
+		<p>Dimensions: {{book.dimensions}}</p>
+	{% endif %}	
 </div>
 
