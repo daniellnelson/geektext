@@ -1,24 +1,36 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.conf import settings
+from django.db import models
+from geekprofile.models import Profile
+from details.models import Book
 
-from core.models import Product
-
-class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(default=datetime.now)
-
-class CartItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    price_ht = models.FloatField(blank=True)
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE)
-
-    
-
-    def price_ttc(self):
-        TAX_AMOUNT = 19.25
-        return self.price_ht * (1 + TAX_AMOUNT/100.0)
+class Item(models.Model):
+    title = models.CharField(max_length=100)
+    price = models.FloatField()
 
     def __str__(self):
-        return  self.client + " - " + self.product
+        return self.title
+
+
+class OrderItem(models.Model):
+    item = models.ForeignKey(Item,on_delete=models.CASCADE)
+   
+
+
+
+class Order(models.Model):
+
+    #associate the order with a user
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    #items in the order
+    items = models. ManyToManyField(OrderItem)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    
+    #checks if order was ordered
+    ordered = models.BooleanField(default=False)
+    
+  
