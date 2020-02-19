@@ -16,4 +16,3 @@ class Book(models.Model):
     synopsis = models.CharField(max_length=1000, blank=True, null=True)
     ISBN = models.CharField(max_length=25, blank=True, null=True)
     dimensions = models.CharField(max_length=50, blank=True, null=True)
-    
