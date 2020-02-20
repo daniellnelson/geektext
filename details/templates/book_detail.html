@@ -1,3 +1,21 @@
+ {% load static %}
+<html>
+ <head>
+        <title>GeekText</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/admin/css/details.css' %}">
+</head>
+<div class="logo">
+<h1>GeekText</h1>
+</div>
+<div class="topnav">
+  <a>Home</a>
+<a>Search</a>
+<a href="{% url 'item-list' %}">Shopping Cart</a>
+<a href="{% url 'wish_list'%}">Wish List</a>
+<a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
+</div>
 <div>
 	<h3> {{book.title|capfirst }}</h3>
 	<p>Written By: {{book.author}}</p>
@@ -25,6 +43,8 @@
 		<p>Dimensions: {{book.dimensions}}</p>
 	{% endif %}	
 	<button> Add to Cart</Button>
-	
+	<p>Books also by {{book.author}}</p>
+
+  </div>
 </div>
 
