@@ -1,0 +1,27 @@
+.logo {
+    color: #C25100;
+	float: center;
+	margin-left: 750px;
+}
+
+.topnav {
+    color: #C25100;
+	float: center;
+	margin-left: 640px;
+	padding-bottom: 100px;
+}
+
+h3 {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+.details {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+p {
+	color: black;
+	font-family: 'Lobster';
+}
