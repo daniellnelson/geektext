@@ -10,7 +10,7 @@ def profile_signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('profile_signup')
+            return redirect('profile_login')
     else:
         form = ProfileRegisterForm()
     return render(request, 'profile_signup.html',{'form':form})
