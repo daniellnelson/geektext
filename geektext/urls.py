@@ -3,6 +3,8 @@ from django.conf import settings # new
 from django.urls import path, include # new
 from django.conf.urls.static import static # new
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
+
 
 from details import views
 from geekprofile import views as profile_views
@@ -11,6 +13,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
+    url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
+    url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
+    url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
 ]
 

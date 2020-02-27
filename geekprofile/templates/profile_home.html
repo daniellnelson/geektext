@@ -1,14 +1,3 @@
-{% block content %}
-    <div class = "profile_content">
-      <form method="POST">
-        {% csrf_token %}
-        This is going to be the page for the profiles.
-        {{ form.as_p }}
-        <div>
-          <button type="submit">
-            Sign Up
-          </button>
-        </div>
-      </form>
-    </div>
-{% endblock content %}
+<h1>{{user.username}}</h1>
+<a href = "{% url 'home' %}" >Home</a>
+<p>{{user.email}}</p>
