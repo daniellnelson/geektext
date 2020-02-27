@@ -1,0 +1,14 @@
+{% load static %}
+<html>
+<div>
+<ul>
+ {%for list in lists%}
+ <p>{{list.listname}}</p>
+ <p>Created on: {{ list.created }}</p>
+ {%if list.books %}
+  <p>{{books}}</p>
+ {% endif %}
+ {% endfor %}
+</ul>
+</div>
+</html>
