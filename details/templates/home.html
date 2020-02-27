@@ -10,6 +10,7 @@
 <h1>GeekText</h1>
 </div>
 <div class="topnav">
+<<<<<<< HEAD
 	<a href="{% url 'home' %}">Home</a>
 	<a>Search</a>
 	<a href="{% url 'item-list' %}">Shopping Cart</a>
@@ -20,6 +21,17 @@
       <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
   {% endif %}
 	
+=======
+  <a>Home</a>
+<a>Search</a>
+<a>Shopping Cart</a>
+<a>Wish List</a>
+{% if user.is_authenticated %}
+  <a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+{% else %}
+    <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+{% endif %}
+>>>>>>> parent of 6702cff... latest
 </div>
 <div>
 <ul>
@@ -36,7 +48,6 @@
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost}}</p>
-	<button>Add to Cart</Button>
   </div>
   {% endfor %}
 </ul>
