@@ -1,4 +1,6 @@
-{% load static %}
+ {% load static %}
+
+ {% block content%}
 
 
 <!DOCTYPE html>
@@ -10,7 +12,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Material Design Bootstrap</title>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link rel="stylesheet" href="{% load static 'https://use.fontawesome.com/releases/v5.11.2/css/all.css'%}">
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
