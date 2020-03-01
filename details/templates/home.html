@@ -28,7 +28,7 @@
 	</a>
 	<p>{{book.title}}</p>
 	<p>Written By: {{ book.author}}</p>
-	{%if book.genre %}
+	{% if book.genre %}
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost}}</p>
