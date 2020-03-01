@@ -19,11 +19,11 @@
 </div>
 <div>
 <ul>
-  {%for book in books%}
+  {% for book in books %}
   <div class="booktitle">
     <a href="{%url 'book_detail' book.id%}">
 	</a>
-	<a href="{%url 'book_detail' book.id%}">
+	<a href="{% url 'book_detail' book.id %}">
     <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
 	</a>
 	<p>{{book.title}}</p>
