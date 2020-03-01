@@ -1,0 +1,14 @@
+You're gonna rate the book
+
+{% load static %}
+
+{%block content%}
+  <h2>Please rate {{book.title}}</h2>
+  <div class="card-body">
+    <form method="get" style="margin-top: 1.3em;">
+        {{rate_form.as_p}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </form>
+  </div>
+{%endblock%}
