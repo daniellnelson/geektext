@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-from django.db.models import Avg
 
 class Author(models.Model):
     firstName = models.CharField(max_length=100)
@@ -26,12 +24,4 @@ class Book(models.Model):
     synopsis = models.CharField(max_length=1000, blank=True, null=True)
     ISBN = models.CharField(max_length=25, blank=True, null=True)
     dimensions = models.CharField(max_length=50, blank=True, null=True)
-    avg_rating = models.DecimalField(decimal_places=1, max_digits=2, default=0)
-
-    def rating_avg(self):
-        book = Book.objects.get(id=self.id)
-        return list(book.rating_set.aggregate(Avg('rating')).values())[0]
-
-    def rating_count(self):
-        return Rating.objects.all().filter(book=self).count()
 
