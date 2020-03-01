@@ -31,6 +31,7 @@
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost}}</p>
+	<a href="{%url 'display_comment'}">Reviews</a>
 	<button>Add to Cart</Button>
   </div>
   {% endfor %}
