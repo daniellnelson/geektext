@@ -14,7 +14,7 @@
 	         <a href="{% url 'home' %}">Home</a>
 	         <a>Search</a>
 	         <a href="{% url 'item-list' %}">Shopping Cart</a>
-	         <a href="{% url 'wish_list'%}">Wish List</a>
+	         <a href="{% url 'all_wish_list'%}">Wish List</a>
 	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
       </div>
       <div class="details">
@@ -49,6 +49,7 @@
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>
+              <button class="contents_clicker">Add to Wishlist</Button>
 	         </div>
         </div>
 </html>
