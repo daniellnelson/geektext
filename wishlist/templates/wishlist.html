@@ -1,6 +1,10 @@
 {% load static %}
 <html>
 <div>
+<h1>My Wish Lists</h1>
+
+<a href="{% url 'create_wish_list' %}">Create New List</a>
+
 <ul>
  {%for list in lists%}
  <p>{{list.listname}}</p>
