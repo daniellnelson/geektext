@@ -50,6 +50,8 @@
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
+              <p><a href="{%url 'rate_book' book.id%}">Rate</a></p>
+              <p><a href="{%url 'write_comment' book.id%}">Write a Review</a></p>
 	         </div>
         </div>
 </html>
