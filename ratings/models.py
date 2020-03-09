@@ -1,24 +1,19 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from details.models import Book
+from geekprofile.models import Profile
+from django.utils.timezone import now
 # Create your models here.
 
-class Rating(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
+class Review(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
+    anonymous = models.BooleanField()
     rating = models.DecimalField(decimal_places=1, max_digits=2, default=0)
+    comment = models.TextField(max_length=500, blank=True)
 
     class Meta:
-        ordering = ['-rating']
-
-class Comment(models.Model):
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=50, null=True, default='anonymous user')
-    body = models.TextField()
-    #created_on = models.DateTimeField()
-    active = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ['name']
+        ordering = ['user']
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)
+        return 'Comment by {} -- {}'.format(self.user, self.book.title)

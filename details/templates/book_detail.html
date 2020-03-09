@@ -51,22 +51,8 @@
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
               {% if user.is_authenticated %}
-                <p><a href="{%url 'rate_book' book.id%}">Rate</a></p>
-                <p><a href="{%url 'write_comment' book.id%}">Write a Review</a></p>
+                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
               {% endif %}
 	         </div>
-        </div>
-        <div>
-          <ul>
-            {% for comment in comments %}
-              {% if book.id == comment.book.id %}
-                <h3 class="book-reviews">{{book.title}}</h3>
-                  <p>Written By: {{comment.name}}</p>
-                  <p>{{comment.body}}</p>
-                  <p></p>
-              {% endif %}
-            {% endfor %}
-            <a href="{%url 'write_comment' book.id%}">Write a Review</a>
-          </ul>
         </div>
 </html>

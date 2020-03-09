@@ -27,9 +27,7 @@ urlpatterns = [
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
-    url(r'^details/review/(\d+)/', ratings_views.write_comment, name = 'write_comment'),
-    url(r'^details/rate/(\d+)/', ratings_views.rate_book, name = 'rate_book'),
-    url(r'^reviews/(\d+)/', ratings_views.display_comment, name = 'display_comment'),
+    url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
 ]
 
 
