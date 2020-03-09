@@ -18,9 +18,22 @@ class ProfileRegisterForm(UserCreationForm):
                   'nickname','street_addr','apt_suite_unit',
                   'city', 'state','zipcode']
 
-#def save(self, commit = True):
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
 
-#    return p
+    class Meta:
+        model = User
+        fields = ['username','email']
 
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['nickname']
+
+class AddressUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['street_addr','apt_suite_unit',
+            'city','state','zipcode']
 
 #this inherits from UserCreationForm and adds the email fields
