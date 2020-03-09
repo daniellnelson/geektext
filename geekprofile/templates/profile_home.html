@@ -1,20 +1,12 @@
 <h1>{{user.profile|capfirst}}</h1>
 <a href = "{% url 'home' %}" >Home</a>
-{% block content %}
-    <div class = "update_profile_content">
-      <form method="POST" >
-        {% csrf_token %}
-        {{u_form.as_p}}
-        {{p_form.as_p}}
-        {{a_form.as_p}}
-        <div>
-          <button type="submit">
-            Update
-          </button>
-        </div>
-      </form>
-    </div>
-{% endblock content %}
+<form action="{% url 'profile_edit' %}" >
+  {% csrf_token %}
+  <button method="post" type='submit'>
+    Edit
+  </button>
+</form>
+
 <p>Email: {{user.email}}</p>
 <p>Nickname: {{user.profile.nickname}}</p>
 {%for address in user.profile.home_address.all %}

@@ -32,6 +32,10 @@ def profile_signup(request):
     return render(request, 'profile_signup.html',{'form':form})
 
 def profile_detail(request):
+
+    return render(request, 'profile_home.html')
+
+def profile_edit(request):
     if request.method=='POST':
         u_form = UserUpdateForm(request.POST, instance = request.user)
         p_form = ProfileUpdateForm(request.POST, instance = request.user.profile)
@@ -40,7 +44,7 @@ def profile_detail(request):
             u_form.save()
             p_form.save()
             a_form.save()
-            return redirect('profile_home.html')
+        return redirect('profile_detail')
     else:
         u_form = UserUpdateForm(instance = request.user)
         p_form = ProfileUpdateForm(instance = request.user.profile)
@@ -50,5 +54,5 @@ def profile_detail(request):
         'p_form': p_form,
         'a_form': a_form
     }
-    return render(request, 'profile_home.html', context)
+    return render(request, 'profile_edit.html',context)
     #HttpResponse('<p>Profile with the id {}</p>'.format(id))
