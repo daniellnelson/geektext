@@ -2,5 +2,11 @@
 <a href = "{% url 'home' %}" >Home</a>
 <p>Email: {{user.email}}</p>
 <p>Nickname: {{user.profile.nickname}}</p>
-<p>Address: {{user.profile.home_address}}</p>
+{%for address in user.profile.home_address.all %}
+<p>Address: {{address.street_addr}}</p>
+<p>Apt / Suite / Unit: {{address.apt_suite_unit}}</p>
+<p>City: {{address.city}}</p>
+<p>State: {{address.state}}</p>
+<p>Zipcode: {{address.zipcode}}</p>
+{%endfor%}
 <p>Credit Card Number: {{user.profile.creditcard.number}}</p>

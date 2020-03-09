@@ -5,9 +5,9 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     home_address = models.ManyToManyField('Address')
     nickname = models.CharField(max_length = 25)
-    creditcard = models.OneToOneField('CreditCard',on_delete=models.CASCADE)
+    creditcard = models.ForeignKey('CreditCard',on_delete=models.CASCADE, null = True)
     def __str__(self):
-        return '%s %s' % (self.user.username, "Profile")
+        return '%s %s' % (self.user, "Profile")
 
 
 class Address(models.Model):

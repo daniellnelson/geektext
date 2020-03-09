@@ -1,6 +1,6 @@
 {% block content %}
     <div class = "profile_content">
-      <form method="POST">
+      <form method="POST" >
         {% csrf_token %}
         This is going to be the page for the profiles.
         {{ form.as_p }}
