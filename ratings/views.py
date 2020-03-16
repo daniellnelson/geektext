@@ -8,6 +8,7 @@ from geekprofile.models import Profile
 from Shopping_cart.models import Order, OrderItem, Item
 from .forms import ReviewForm
 
+
 def review(request, id):
         template_name = 'write_review.html'
         book = None
@@ -40,3 +41,8 @@ def review(request, id):
             form = ReviewForm(instance=review)
 
         return render(request, template_name, {'book': book, 'reviews': reviews, 'form': form})
+
+def display_reviews(request, id):
+    book = get_object_or_404(Book, id=id)
+    reviews = Review.objects.all()
+    return render(request, 'book_reviews.html', {'book': book, 'reviews': reviews})

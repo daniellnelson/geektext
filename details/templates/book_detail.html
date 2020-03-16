@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
       <head>
@@ -48,32 +49,16 @@
 		          {%if book.dimensions%}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
+
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
               {% if user.is_authenticated %}
-                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
+                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
               {% endif %}
 	         </div>
         </div>
-        <div class="comments">
-          {% if book %}
-            <h3>Comments for {{ book.title }}</h3>
-              {% for review in reviews %}
-                {% if book.id == 1 %}
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                          {% if review.anonymous %}
-                              <p>Anonymous</p>
-                          {% else %}
-                              <p>{{ review.user }}</p>
-                          {% endif %}
-                      </div>
-                      <div class="panel-body">
-                          <p>{{ review.comment }}</p>
-                      </div>
-                  </div>
-                  {% endif %}
-              {% endfor %}
-            {% endif %}
+        <div>
+        </br>
+          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
         </div>
 </html>
