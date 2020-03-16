@@ -1,14 +1,22 @@
 {% load static %}
 <html>
 <div>
+<h1>My Wish Lists</h1>
+
+<a href="{% url 'create_wish_list' %}">Create New List</a>
+
 <ul>
- {%for list in lists%}
- <p>{{list.listname}}</p>
- <p>Created on: {{ list.created }}</p>
- {%if list.books %}
-  <p>{{books}}</p>
- {% endif %}
- {% endfor %}
+  {% for list in lists %}
+    <h3><a href="{% url 'current_wish_list' list.id %}">{{list.listname}}</a></h3>
+    <p>Created on: {{ list.created }}</p>
+      {% for book in list.books.all %}
+        <ul>
+          <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
+        </ul>
+      {% empty %}
+        <p>This list is empty.</li>
+      {% endfor %}
+  {% endfor %}
 </ul>
 </div>
 </html>

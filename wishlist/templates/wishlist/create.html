@@ -1,0 +1,12 @@
+{% block content %}
+{% load static %}
+
+<h1>Create A WishList</h1>
+
+<form method="POST">
+  {% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Add WishList</button>
+</form>
+
+{% endblock %}

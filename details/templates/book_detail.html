@@ -1,55 +1,58 @@
 {% load static %}
-
+<!DOCTYPE html>
 <html>
- <head>
+      <head>
         <title>GeekText</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
-</head>
-<div class="logo">
-<h1>GeekText</h1>
-</div>
-<div class="topnav">
-	<a href="{% url 'home' %}">Home</a>
-	<a>Search</a>
-	<a href="{% url 'item-list' %}">Shopping Cart</a>
-	<a href="{% url 'wish_list'%}">Wish List</a>
-	<a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
-</div>
-<div class="details">
-	<img class="details_image" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
-</div>
-<div class="contents">
-	<h3> {{book.title|capfirst }}</h3>
-	<p>Written By: {{book.author}}</p>
-	<div class="contents_overview">
-		{%if book.synopsis%}
-			<p>Overview: {{book.synopsis}}</p>
-		{% endif %}
-	</div>
-	<div class="contents_suboverview">
-		{%if book.genre%}
-			<p>Genre: {{book.genre}}</p>
-		{% endif %}
-		<p>{{ book.publisher }}</p>
-		<p>Published on: {{book.published_date|date:"M D Y"}}</p>
-		<p>Product Details</p>
-		{%if book.condition%}
-			<p>Condition: {{book.condition}}</p>
-		{% endif %}
-		{%if book.type%}
-			<p>Format: {{book.type}}</p>
-		{% endif %}
-		<p>Page Count: {{book.pages }}</p>
-		{%if book.ISBN%}
-			<p>ISBN: {{book.ISBN}}</p>
-		{% endif %}
-		{%if book.dimensions%}
-			<p>Dimensions: {{book.dimensions}}</p>
-		{% endif %}	
-		<button class="contents_clicker"> Add to Cart</Button>
-	</div>
-</div>
-
-
+      </head>
+      <div class="logo">
+          <h1>GeekText</h1>
+      </div>
+      <div class="topnav">
+	         <a href="{% url 'home' %}">Home</a>
+	         <a>Search</a>
+	         <a href="{% url 'item-list' %}">Shopping Cart</a>
+	         <a href="{% url 'all_wish_list'%}">Wish List</a>
+	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
+      </div>
+      <div class="details">
+	       <img class="details_image" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
+      </div>
+      <div class="contents">
+	       <h3> {{book.title|capfirst }}</h3>
+	       <p>Written By: {{book.author}}</p>
+	        <div class="contents_overview">
+		          {%if book.synopsis%}
+			           <p>Overview: {{book.synopsis}}</p>
+		          {% endif %}
+	        </div>
+	        <div class="contents_suboverview">
+		          {%if book.genre%}
+			           <p>Genre: {{book.genre}}</p>
+		          {% endif %}
+		          <p>{{ book.publisher }}</p>
+		          <p>Published on: {{book.published_date|date:"M D Y"}}</p>
+		          <p>Product Details</p>
+		          {%if book.condition%}
+			           <p>Condition: {{book.condition}}</p>
+		          {% endif %}
+		          {%if book.type%}
+			           <p>Format: {{book.type}}</p>
+		          {% endif %}
+		          <p>Page Count: {{book.pages }}</p>
+		          {%if book.ISBN%}
+			           <p>ISBN: {{book.ISBN}}</p>
+		          {% endif %}
+		          {%if book.dimensions%}
+			           <p>Dimensions: {{book.dimensions}}</p>
+		          {% endif %}
+		          <button class="contents_clicker"> Add to Cart</Button>
+              <button class="contents_clicker">Add to Wishlist</Button>
+              {% if user.is_authenticated %}
+                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
+              {% endif %}
+	         </div>
+        </div>
+</html>
