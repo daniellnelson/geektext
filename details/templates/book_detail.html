@@ -49,7 +49,7 @@
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>
-              <button class="contents_clicker">Add to Wishlist</Button>
+              <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
 	         </div>
         </div>
 </html>

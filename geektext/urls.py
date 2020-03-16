@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
+    url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list')
 ]
 
 
