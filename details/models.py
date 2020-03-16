@@ -11,4 +11,3 @@ class Book(models.Model):
     type = models.CharField(choices=BOOK_TYPE, max_length=1)
     published_date=models.DateTimeField()
     cover = models.ImageField(upload_to='uploads/')
-    
