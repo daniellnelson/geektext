@@ -55,4 +55,25 @@
               {% endif %}
 	         </div>
         </div>
+        <div class="comments">
+          {% if book %}
+            <h3>Comments for {{ book.title }}</h3>
+              {% for review in reviews %}
+                {% if book.id == 1 %}
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          {% if review.anonymous %}
+                              <p>Anonymous</p>
+                          {% else %}
+                              <p>{{ review.user }}</p>
+                          {% endif %}
+                      </div>
+                      <div class="panel-body">
+                          <p>{{ review.comment }}</p>
+                      </div>
+                  </div>
+                  {% endif %}
+              {% endfor %}
+            {% endif %}
+        </div>
 </html>

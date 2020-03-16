@@ -1,10 +1,27 @@
 {% load static %}
+<!DOCTYPE html>
+<html>
+      <head>
+        <title>GeekText</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
+      </head>
+      <div class="logo">
+          <h1>GeekText</h1>
+      </div>
+      <div class="topnav">
+	         <a href="{% url 'home' %}">Home</a>
+	         <a>Search</a>
+	         <a href="{% url 'item-list' %}">Shopping Cart</a>
+	         <a href="{% url 'all_wish_list'%}">Wish List</a>
+	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
+      </div>
 {% if book %}
 <div>
-<h1>Write a review for {{book.title}}</h1>
-{% if user.is_authenticated %}
-  {%if purchased %}
-  <form method="post" class="col-md-4">
+  <h1>Write a review for {{book.title}}</h1>
+  {% if user.is_authenticated %}
+    <form method="post" class="col-md-4">
     <h3>Leave a Review</h3>
     {% csrf_token %}
 
@@ -36,14 +53,11 @@
       </div>
     </div>
   </form>
+
   {% else %}
   <div class="col-md-4">
-    <h4>Purchase book to review!</h4>
+    <h4>Must be logged in to review!</h4>
   </div>
   {% endif %}
-{% else %}
-<div class="col-md-4">
-  <h4>Must be logged in to review!</h4>
-</div>
 {% endif %}
-{% endif %}
+</html>

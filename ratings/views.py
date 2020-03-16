@@ -9,6 +9,7 @@ from Shopping_cart.models import Order, OrderItem, Item
 from .forms import ReviewForm
 
 def review(request, id):
+        template_name = 'write_review.html'
         book = None
         reviews = None
 
@@ -24,16 +25,18 @@ def review(request, id):
             except Review.DoesNotExist:
                 review = Review(book=book, user=request.user)
 
-            purchased = Order.objects.filter(user=request.user, Order__items=book).exists()
+            #purchased = Order.objects.filter(user=request.user, Order__items=book).exists()
         else:
             review = None
-            purchased = False
+            #purchased = False
 
         if request.method == 'POST':
             form = ReviewForm(request.POST, instance=review)
             if form.is_valid():
                 form.save()
+
+                return redirect('/details/' + id + '/')
         else:
             form = ReviewForm(instance=review)
 
-        return render(request, template_name, {'book': book, 'reviews': reviews, 'form': form, 'purchased': purchased})
+        return render(request, template_name, {'book': book, 'reviews': reviews, 'form': form})
