@@ -4,9 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 class ProfileRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    nickname = forms.CharField(max_length=25)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'nickname','email', 'password1', 'password2']
 
 #this inherits from UserCreationForm and adds the email fields

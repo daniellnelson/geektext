@@ -1,19 +1,20 @@
 .logo {
     color: #C25100;
 	float: center;
-	margin-left: 750px;
+	text-align: center;
 }
 
 .topnav {
     color: #C25100;
 	float: center;
-	margin-left: 640px;
+	text-align: center;
 	padding-bottom: 100px;
 }
 
 .booktitle {
 	 display:inline-block;
-	 margin-left: 50px;
+	 margin-left: 25px;
+	 margin-top: 25px;
 }
 
 p {
