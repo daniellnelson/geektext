@@ -14,3 +14,5 @@ def book_detail(request, id):
     except Book.DoesNotExist:
         raise Http404('Book Not Found')
     return render(request, 'book_detail.html', {'book': book})
+   
+    

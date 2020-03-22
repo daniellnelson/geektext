@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'wishlist',
     'geekprofile',
     'Shopping_cart'
-    
+
 ]
 
 MIDDLEWARE = [
@@ -133,3 +133,4 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/static/'
+LOGIN_REDIRECT_URL = 'home'
