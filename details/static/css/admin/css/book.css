@@ -1,0 +1,41 @@
+.logo {
+    color: #C25100;
+	float: center;
+	text-align: center;
+}
+
+.topnav {
+    color: #C25100;
+	float: center;
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+h3 {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+.details {
+	float: left;
+	max-width: 640px;
+	margin-left: 50px;
+}
+.contents {
+	border: 3px solid black;
+	padding-right: 5px;
+	padding-left: 5px;
+	margin-left: 400px;
+	max-width: 500px;
+}
+.contents_clicker {
+	margin-left: 50px;
+}
+
+
+p {
+	color: black;
+	font-family: 'Lobster';
+	margin-left: 50px;
+}
+

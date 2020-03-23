@@ -1,0 +1,6 @@
+<h1>{{user.profile|capfirst}}</h1>
+<a href = "{% url 'home' %}" >Home</a>
+<p>Email: {{user.email}}</p>
+<p>Nickname: {{user.profile.nickname}}</p>
+<p>Address: {{user.profile.home_address}}</p>
+<p>Credit Card Number: {{user.profile.creditcard.number}}</p>
