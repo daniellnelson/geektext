@@ -1,9 +1,9 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
       <head>
         <title>GeekText</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
@@ -19,15 +19,17 @@
 	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
       </div>
       <div class="details">
-	       <img data-enlargable width="250" style="cursor: zoom-in" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
+	       <img class="details_image" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
       </div>
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
-		   <p>Written By:  <a>{{book.author}}</a></p<
+	       <p>Written By: {{book.author}}</p>
 	        <div class="contents_overview">
 		          {%if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
+	        </div>
+	        <div class="contents_suboverview">
 		          {%if book.genre%}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
@@ -47,28 +49,16 @@
 		          {%if book.dimensions%}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
+
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
               {% if user.is_authenticated %}
-                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
+                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
               {% endif %}
 	         </div>
         </div>
-		
+        <div>
+        </br>
+          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
+        </div>
 </html>
-<script type="text/javascript">
-$('img[data-enlargable]').addClass('img-enlargable').click(function(){
-    var src = $(this).attr('src');
-    $('<div>').css({
-        background: 'RGBA(0,0,0,.5) url('+src+') no-repeat center',
-        backgroundSize: 'contain',
-        width:'100%', height:'100%',
-        position:'fixed',
-        zIndex:'10000',
-        top:'0', left:'0',
-        cursor: 'zoom-out'
-    }).click(function(){
-        $(this).remove();
-    }).appendTo('body');
-});
-</script>
