@@ -8,8 +8,8 @@ from details.models import Book
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    price = models.FloatField()
-
+    price = models.FloatField(null=True, blank=True, default=None)
+    
     def __str__(self):
         return self.title
 
