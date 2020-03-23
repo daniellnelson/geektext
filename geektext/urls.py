@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
     url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
     url(r'^details/review/all/(\d+)/', ratings_views.display_reviews, name = 'display_reviews'),
+        url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list')
 ]
 
 
