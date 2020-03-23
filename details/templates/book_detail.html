@@ -49,6 +49,10 @@
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
+              {% if user.is_authenticated %}
+                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
+              {% endif %}
+	         </div>
         </div>
 		
 </html>
