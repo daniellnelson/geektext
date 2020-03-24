@@ -13,6 +13,5 @@ def book_detail(request, id):
         book = Book.objects.get(id=id)
     except Book.DoesNotExist:
         raise Http404('Book Not Found')
+    books = Book.objects.all()
     return render(request, 'book_detail.html', {'book': book})
-   
-    

@@ -23,11 +23,13 @@
       </div>
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
-		   <p>Written By:  <a>{{book.author}}</a></p<
+	       <p>Written By: {{book.author}}</p>
 	        <div class="contents_overview">
 		          {%if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
+	        </div>
+		<div class="contents_suboverview">
 		          {%if book.genre%}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
@@ -48,9 +50,16 @@
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>
-              <button class="contents_clicker">Add to Wishlist</Button>
+              <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
+			  {% if user.is_authenticated %}
+                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
+              {% endif %}
+	         </div>
         </div>
-		
+        <div>
+        </br>
+          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
+        </div>
 </html>
 <script type="text/javascript">
 $('img[data-enlargable]').addClass('img-enlargable').click(function(){

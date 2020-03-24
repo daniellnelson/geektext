@@ -12,7 +12,7 @@ from django.urls import path, include
 
 from Shopping_cart import views as cart_views
 
-
+from ratings import views as ratings_views
 
 
 urlpatterns = [
@@ -27,7 +27,11 @@ urlpatterns = [
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
+    url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
+    url(r'^details/review/all/(\d+)/', ratings_views.display_reviews, name = 'display_reviews'),
+        url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list')
 ]
+
 
 
 
