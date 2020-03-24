@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <style>
   .rating-star {
     max-width:15%;
@@ -6,51 +8,51 @@
   }
 </style>
 {% if books %}
-  {% if books.rating_avg is None or books.rating_avg == 0 %}
+  {% if books|rating_avg is None or books|rating_avg == 0 %}
     <p><img src="{% static 'images/0_star.svg' %}" class="rating-star"></p>
-  {% elif books.rating_avg > 0 and books.rating_avg < 1 %}
+  {% elif books|rating_avg > 0 and books|rating_avg < 1 %}
     <p><img src="{% static 'images/0.5_star.svg' %}" class="rating-star"></p>
-  {% elif books.rating_avg >= 1 and books.rating_avg < 1.5 %}
+  {% elif books|rating_avg >= 1 and books|rating_avg < 1.5 %}
     <p><img src="{% static 'images/1_star.svg' %}" class="rating-star"></p>
-  {% elif books.rating_avg >= 1.5 and books.rating_avg < 2 %}
+  {% elif books|rating_avg >= 1.5 and books|rating_avg < 2 %}
       <img src="{% static 'images/1.5_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 2 and books.rating_avg < 2.5 %}
+  {% elif books|rating_avg >= 2 and books|rating_avg < 2.5 %}
       <img src="{% static 'images/2_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 2.5 and books.rating_avg < 3 %}
+  {% elif books|rating_avg >= 2.5 and books|rating_avg < 3 %}
       <img src="{% static 'images/2.5_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 3 and books.rating_avg < 3.5 %}
+  {% elif books|rating_avg >= 3 and books|rating_avg < 3.5 %}
       <img src="{% static 'images/3_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 3.5 and books.rating_avg < 4 %}
+  {% elif books|rating_avg >= 3.5 and books|rating_avg < 4 %}
       <img src="{% static 'images/3.5_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 4 and books.rating_avg < 4.5 %}
+  {% elif books|rating_avg >= 4 and books|rating_avg < 4.5 %}
       <img src="{% static 'images/4_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 4.5 and books.rating_avg < 4.75 %}
+  {% elif books|rating_avg >= 4.5 and books|rating_avg < 4.75 %}
       <img src="{% static 'images/4.5_star.svg' %}" class="rating-star">
-  {% elif books.rating_avg >= 4.75 %}
-      <img src="{% static 'images/1.5_star.svg' %}" class="rating-star">
+  {% elif books|rating_avg >= 4.75 %}
+      <img src="{% static 'images/5_star.svg' %}" class="rating-star">
   {% endif %}
 {% else %}
-  {% if book.rating_avg is None or book.rating_avg == 0 %}
+  {% if book|rating_avg is None or book|rating_avg == 0 %}
       <img src="{% static 'images/0_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg > 0 and book.rating_avg < 1 %}
+  {% elif book|rating_avg > 0 and book|rating_avg < 1 %}
       <img src="{% static 'images/0.5_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 1 and book.rating_avg < 1.5 %}
+  {% elif book|rating_avg >= 1 and book|rating_avg < 1.5 %}
       <img src="{% static 'images/1_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 1.5 and book.rating_avg < 2 %}
+  {% elif book|rating_avg >= 1.5 and book|rating_avg < 2 %}
       <img src="{% static 'images/1.5_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 2 and book.rating_avg < 2.5 %}
+  {% elif book|rating_avg >= 2 and book|rating_avg < 2.5 %}
       <img src="{% static 'images/2_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 2.5 and book.rating_avg < 3 %}
+  {% elif book|rating_avg >= 2.5 and book|rating_avg < 3 %}
       <img src="{% static 'images/2.5_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 3 and book.rating_avg < 3.5 %}
+  {% elif book|rating_avg >= 3 and book|rating_avg < 3.5 %}
       <img src="{% static 'images/3_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 3.5 and book.rating_avg < 4 %}
+  {% elif book|rating_avg >= 3.5 and book|rating_avg < 4 %}
       <img src="{% static 'images/3.5_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 4 and book.rating_avg < 4.5 %}
+  {% elif book|rating_avg >= 4 and book|rating_avg < 4.5 %}
       <img src="{% static 'images/4_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 4.5 and book.rating_avg < 4.75 %}
+  {% elif book|rating_avg >= 4.5 and book|rating_avg < 4.75 %}
       <img src="{% static 'images/4.5_star.svg' %}" class="rating-star">
-  {% elif book.rating_avg >= 4.75 %}
-      <img src="{% static 'images/1.5_star.svg' %}" class="rating-star">
+  {% elif book|rating_avg >= 4.75 %}
+      <img src="{% static 'images/5_star.svg' %}" class="rating-star">
   {% endif %}
 {% endif %}

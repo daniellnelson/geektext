@@ -1,4 +1,5 @@
 {% load static %}
+{% load review %}
 
 <!DOCTYPE html>
 <html>
@@ -49,11 +50,12 @@
 		          {%if book.dimensions%}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
-
+              <p>Average Rating: {% include 'rating.html' %}</p>
 		          <button class="contents_clicker"> Add to Cart</Button>
               <button class="contents_clicker">Add to Wishlist</Button>
               {% if user.is_authenticated %}
-                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
+              <p></p>
+                <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
               {% endif %}
 	         </div>
         </div>

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
       <head>
@@ -21,8 +22,6 @@
 <body>
   {% if book %}
   <div class="comments">
-    <p>Average Rating: {{book.rating_avg}}</p>
-    <p>({{book.rating_count}}) reviews</p>
     <ul>
       {% for review in reviews %}
         {% if book.id == review.book.id %}
