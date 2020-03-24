@@ -6,6 +6,7 @@ class Author(models.Model):
     lastName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     age = models.IntegerField(null=True, blank=True, default=None)
+    biography =  models.CharField(max_length=100)
     def __unicode__(self):
         return u'%s %s' % (self.firstname, self.lastname)
 

@@ -1,19 +1,46 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-      <head>
-        <title>GeekText</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
-      </head>
-      <div class="logo">
-          <h1>GeekText</h1>
-      </div>
-      <div class="topnav">
-	         <a href="{% url 'home' %}">Home</a>
-	         <a>Search</a>
-	         <a href="{% url 'item-list' %}">Shopping Cart</a>
-	         <a href="{% url 'all_wish_list'%}">Wish List</a>
-	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
-      </div>
+ <head>
+    <title>GeekText</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/admin/css/details.css' %}">
+</head>
+<div class="logo">
+	<h1>GeekText</h1>
+</div>
+<div class="topnav">
+	<a href="{% url 'home' %}">Home</a>
+	<a>Search</a>
+	<a href="{% url 'item-list' %}">Shopping Cart</a>
+	<a href="{% url 'all_wish_list'%}">Wish List</a>
+	{% if user.is_authenticated %}
+		<a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+	{% else %}
+		<a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+	{% endif %}
+</div>
+{%for book in books|slice:":1"%}
+	<h2> {{book.author.firstName|capfirst }} {{book.author.lastName|capfirst }} </h2>
+	<p> Age: {{book.author.age}} | Location: {{book.author.location}} </p>
+	<p>About the Author: {{book.author.biography}}<p>
+	<p>Other books by this author:<p>
+{% endfor %}
+<ul>
+  {%for book in books%}
+  <div class="booktitle">
+		<a href="{%url 'book_detail' book.id%}">
+		<img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
+		</a>
+		<p>{{book.title}}</p>
+		<p class="hidden">{{book.condition }}</p>
+		<p>Price: ${{ book.cost}}</p>
+		<button>Add to Cart</Button>
+		<button>Add to Wishlist</Button>
+  </div>
+  {% endfor %}
+</ul>
+</html>
+
+	

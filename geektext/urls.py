@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
+    url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
     url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),
