@@ -6,4 +6,10 @@ p {
   font-size: 15px;
   font-style: bold;
   color: black;
+  font-family: Arial;
+}
+
+div.comments {
+  padding-left: 20px;
+  padding-right: 40px;
 }
