@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +35,7 @@
 		{%if book.genre %}
 		{% endif %}
 		<p class="hidden">{{book.condition }}</p>
+		<p>Average Rating: {% include 'rating.html' %}</p>
 		<p>Price: ${{ book.cost}}</p>
 		<button>Add to Cart</Button>
 		<button>Add to Wishlist</Button>

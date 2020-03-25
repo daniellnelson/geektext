@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <!DOCTYPE html>
 <html>
  <head>
@@ -26,16 +28,18 @@
 	<p> Age: {{book.author.age}} | Location: {{book.author.location}} </p>
 	<p>About the Author: {{book.author.biography}}<p>
 	<p>Other books by this author:<p>
+	<img src="{{ book.author.pic.url}}" alt="{{ book.title }}"/>
 {% endfor %}
 <ul>
   {%for book in books%}
   <div class="booktitle">
 		<a href="{%url 'book_detail' book.id%}">
-		<img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
+		<img src="{{ book.cover.url}}" alt="{{book.author.firstName|capfirst }} {{book.author.lastName|capfirst }}"/>
 		</a>
 		<p>{{book.title}}</p>
 		<p class="hidden">{{book.condition }}</p>
 		<p>Price: ${{ book.cost}}</p>
+		<p>Average Rating: {% include 'rating.html' %}</p>
 		<button>Add to Cart</Button>
 		<button>Add to Wishlist</Button>
   </div>

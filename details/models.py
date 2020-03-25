@@ -6,9 +6,10 @@ class Author(models.Model):
     lastName = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
     age = models.IntegerField(null=True, blank=True, default=None)
-    biography =  models.CharField(max_length=100)
-    def __unicode__(self):
-        return u'%s %s' % (self.firstname, self.lastname)
+    biography =  models.CharField(max_length=1000)
+    pic = models.ImageField(upload_to='uploads/', null=True)
+    def __str__(self):
+        return self.firstName +' '+self.lastName
 
 class Book(models.Model):
     PURCHASE_CHOICES = [('New','New'),('Used','Used')]
@@ -26,4 +27,6 @@ class Book(models.Model):
     synopsis = models.CharField(max_length=1000, blank=True, null=True)
     ISBN = models.CharField(max_length=25, blank=True, null=True)
     dimensions = models.CharField(max_length=50, blank=True, null=True)
+    def __str__(self):
+        return self.title
 

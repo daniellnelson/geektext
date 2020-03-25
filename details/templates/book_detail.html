@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <!DOCTYPE html>
 <html>
       <head>
@@ -53,6 +55,7 @@
 		          {%if book.dimensions%}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
+				   <p>Average Rating: {% include 'rating.html' %}</p>
 		          <button class="contents_clicker"> Add to Cart</Button>
               <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
 			  {% if user.is_authenticated %}
