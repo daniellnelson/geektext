@@ -51,12 +51,13 @@
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
               <p>Average Rating: {% include 'rating.html' %}</p>
-		          <button class="contents_clicker"> Add to Cart</Button>
-              <button class="contents_clicker">Add to Wishlist</Button>
               {% if user.is_authenticated %}
               <p></p>
                 <p><a href="{%url 'write_review' book.id%}">Create Customer Review</a></p>
               {% endif %}
+		          <button class="contents_clicker"> Add to Cart</Button>
+              <button class="contents_clicker">Add to Wishlist</Button>
+                <p></p>
 	         </div>
         </div>
         <div>
