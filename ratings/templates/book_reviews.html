@@ -22,6 +22,9 @@
 <body>
   <link rel="stylesheet" href="{% static 'css/rating.css' %}">
   {% if book %}
+  <div class="comments-header">
+    <h2>Customer Reviews</h2>
+  </div>
   <div class="comments">
     <ul>
       {% for review in reviews %}
