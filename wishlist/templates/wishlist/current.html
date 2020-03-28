@@ -1,14 +1,44 @@
 {% block content %}
 {% load static %}
-
+<head>
+       <title>GeekText</title>
+       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+       <link rel="stylesheet" href="{% static 'css/admin/css/details.css' %}">
+</head>
+<div class="logo">
+<h1>GeekText</h1>
+</div>
+<div class="topnav">
+ <a href="{% url 'home' %}">Home</a>
+ <a>Search</a>
+ <a href="{% url 'item-list' %}">Shopping Cart</a>
+ <a href="{% url 'all_wish_list'%}">Wish List</a>
+ {% if user.is_authenticated %}
+   <a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+ {% else %}
+   <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+ {% endif %}
+</div>
 <div>
 <h1>{{list.listname}}</h1>
-
+<form method="POST" action="{% url 'delete_wish_list' list.id %}">
+  {% csrf_token %}
+<button type="submit">Delete List</button>
+</form>
 <ul>
     <p>Created on: {{ list.created }}</p>
       {% for book in list.books.all %}
         <ul>
           <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
+          <form method="POST" action="{% url 'delete_book' book.id list.id %}">
+            {% csrf_token %}
+          <button type="submit">Remove From List</button>
+          </form>
+          <form method="GET" action="{% url 'move_book' book.id list.id %}">
+            {% csrf_token %}
+          <button type="submit">Move To A Different List</button>
+          </form>
         </ul>
       {% empty %}
         <p>This list is empty.</p>

@@ -36,7 +36,7 @@
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost}}</p>
 	<button>Add to Cart</Button>
-  <button>Add to Wishlist</Button>
+  <a href="{% url 'add_to_list' book.id %}"><button>Add to Wishlist</Button></a>
   </div>
   {% endfor %}
 </ul>
