@@ -25,26 +25,26 @@
 	       <h3> {{book.title|capfirst }}</h3>
 		   <p>Written By:  <a>{{book.author}}</a></p<
 	        <div class="contents_overview">
-		          {%if book.synopsis%}
+		          {% if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
-		          {%if book.genre%}
+		          {% if book.genre %}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
 		          <p>{{ book.publisher }}</p>
 		          <p>Published on: {{book.published_date|date:"M D Y"}}</p>
 		          <p>Product Details</p>
-		          {%if book.condition%}
+		          {% if book.condition %}
 			           <p>Condition: {{book.condition}}</p>
 		          {% endif %}
-		          {%if book.type%}
+		          {% if book.type %}
 			           <p>Format: {{book.type}}</p>
 		          {% endif %}
 		          <p>Page Count: {{book.pages }}</p>
-		          {%if book.ISBN%}
+		          {% if book.ISBN %}
 			           <p>ISBN: {{book.ISBN}}</p>
 		          {% endif %}
-		          {%if book.dimensions%}
+		          {% if book.dimensions %}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
 		          <button class="contents_clicker"> Add to Cart</Button>

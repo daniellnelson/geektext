@@ -15,18 +15,26 @@
 	<a href="{% url 'item-list' %}">Shopping Cart</a>
 	<a href="{% url 'all_wish_list'%}">Wish List</a>
   {% if user.is_authenticated %}
-    <a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+    <a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{% url 'profile_detail' %}">{{ user.username }}</a>
   {% else %}
     <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
   {% endif %}
 </div>
 <div>
 <ul>
-  {% for book in books %}
+  {% for book in object_list %}
   <div class="booktitle">
-    <a href="{%url 'book_detail' book.id%}">
+    <!--OLD href of book_detail url routing-->
+    <!--<a href="{% url 'book_detail' book.id%}"> -->
+
+    <!-- New href for book_detail url routing-->
+    <a href="{{ book.get_absolute_url }}">
 	</a>
-	<a href="{% url 'book_detail' book.id %}">
+  <!--OLD href of book_detail url routing-->
+	<!--<a href="{% url 'book_detail' book.id %}">-->
+  
+  <!-- New href for book_detail url routing-->
+    <a href="{{ book.get_absolute_url }}">
     <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
 	</a>
 	<p>{{book.title}}</p>
@@ -34,7 +42,7 @@
 	{% if book.genre %}
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
-	<p>Price: ${{ book.cost}}</p>
+	<p>Price: ${{ book.cost }}</p>
 	<button>Add to Cart</Button>
   <button>Add to Wishlist</Button>
   </div>

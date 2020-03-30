@@ -8,6 +8,7 @@ from django.db.models import Sum
 from geekprofile.models import Profile  #Use from geekprofile
 from details.models import Book       #Use from details
 from django.shortcuts import reverse
+
 #from django_countries.fields import CountryField
 
 
@@ -18,15 +19,28 @@ class Item(models.Model):
     price = Book.cost
     isbn  = Book.ISBN
     quantity = models.IntegerField(default=1)
+    slug  = Book.slug
 
 
     
 
     def __str__(self):
         return self.title
-    
+
     def get_absolute_url(self):
-        return reverse("") #add slug
+        return reverse("geektext:book_detail", kwargs={
+            'slug': self.slug
+        })
+
+    def get_add_to_cart_url(self):
+        return reverse("geektext:add-to-cart", kwargs={
+            'slug': self.slug
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("geektext:remove-from-cart", kwargs={
+            'slug': self.slug
+        })
 
 
 class OrderItem(models.Model):
@@ -39,8 +53,7 @@ class OrderItem(models.Model):
         return self.item.name
 
 
-   
-
+    
 
 
 class Order(models.Model):

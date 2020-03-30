@@ -1,4 +1,16 @@
 from django.db import models
+from django.shortcuts import reverse
+from django.conf import settings
+from django.utils.text import slugify
+from django_extensions.db.fields import AutoSlugField
+
+
+#for random slug generating
+import random
+import string
+import itertools
+
+
 
 class Author(models.Model):
     firstName = models.CharField(max_length=100)
@@ -6,7 +18,7 @@ class Author(models.Model):
     location = models.CharField(max_length=100)
     age = models.IntegerField(null=True, blank=True, default=None)
     def __unicode__(self):
-        return u'%s %s' % (self.firstname, self.lastname)
+        return u'%s %s' % (self.firstName, self.lastName)
 
 class Book(models.Model):
     PURCHASE_CHOICES = [('New','New'),('Used','Used')]
@@ -25,3 +37,36 @@ class Book(models.Model):
     ISBN = models.CharField(max_length=25, blank=True, null=True)
     dimensions = models.CharField(max_length=50, blank=True, null=True)
 
+    #added  by Ferris
+    #slug = models.SlugField(max_length=128)
+    #slug = AutoSlugField(populate_from=['title', 'synopsis', 'ISBN'])
+
+    slug = models.SlugField(max_length=200)
+    #sluggy = models.SlugField(max_length=120, unique=True)
+    
+    def get_absolute_url(self):
+        return reverse("book_detail", kwargs={
+            'slug': self.slug
+        })
+    
+    #FIX GENERATING UNIQUE SLUG USING MANUALLY ADDED SLUG IN ADMIN FOR TIMEBEING
+    """def _get_unique_slug(self):
+        slug= slugify(self.title)
+        unique_slug = slug
+        num = 1
+        while Book.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+ 
+    def save(self, *args, **kwargs):
+        if not self.slug or self.slug == 'slugtest':
+            self.slug = self._get_unique_slug()
+        #super(Book,self).save(*args, **kwargs)
+        super().save(*args, **kwargs)"""
+
+
+    def __unicode__(self):
+        return self.slug
+
+  
