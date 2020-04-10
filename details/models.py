@@ -70,13 +70,10 @@ class Book(models.Model):
         #super(Book,self).save(*args, **kwargs)
         super().save(*args, **kwargs)
         
-        
-
 
 
     def __unicode__(self):
         return self.slug"""
-
 
 
   

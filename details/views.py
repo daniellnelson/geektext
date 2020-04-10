@@ -1,9 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
 from django.views.generic import ListView, DetailView
-from django.shortcuts import reverse,redirect
-from django.utils import timezone
+from django.shortcuts import reverse
 from .models import Book
 from Shopping_cart.models import Order, OrderItem
 
@@ -33,6 +32,7 @@ class BookView(DetailView):
     model = Book
     template_name = 'book_detail.html'
 
+<<<<<<< HEAD
 """def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=Book.slug)
     order_item = OrderItem.objects.create(item=item)
@@ -54,6 +54,8 @@ class BookView(DetailView):
         return redirect("book_detail", slug=slug)"""
 
 
+=======
+>>>>>>> parent of 77b3fac... added add-to-cart in details.views and in urls
 
     
 

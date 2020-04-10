@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView, View
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, reverse
 #from .models import Item
 from django.utils import timezone
 from geekprofile.models import Profile
@@ -17,10 +17,12 @@ class CheckoutView(View):
     model = Book
     template_name = "checkout.html"
 
+
 def item_list(request):
     context = {
         'items' : Book.objects.all()
     }
+    #return render(request, "checkout-page.html", context)
     return render(request, "checkout.html", context)
 
 #def add_to_cart(request, slug):
@@ -47,9 +49,7 @@ def add_to_cart(request, slug):
         #return redirect("book_detail", slug=slug)
         return reverse("book_detail", kwargs={
             'slug' : slug
-        } )
-
-
+        })
 
 
 
