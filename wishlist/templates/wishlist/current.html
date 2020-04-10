@@ -26,6 +26,10 @@
   {% csrf_token %}
 <button type="submit">Delete List</button>
 </form>
+<form method="GET" action="{% url 'edit_list' list.id %}">
+  {% csrf_token %}
+<button type="submit">Edit List</button>
+</form>
 <ul>
     <p>Created on: {{ list.created }}</p>
       {% for book in list.books.all %}

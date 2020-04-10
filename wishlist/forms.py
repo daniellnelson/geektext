@@ -23,3 +23,8 @@ class MoveToListForm(forms.Form):
         super(MoveToListForm, self).__init__(*args, **kwargs)
         if user:
             self.fields['field'].queryset = Wishlist.objects.filter(user=user)
+
+class EditListForm(forms.ModelForm):
+    class Meta:
+        model = Wishlist
+        fields = ['listname']

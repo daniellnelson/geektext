@@ -30,7 +30,8 @@ urlpatterns = [
     url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list'),
     url(r'^wishlist/delete/(\d+)/(\d+)/', wishviews.delete_book, name = 'delete_book'),
     url(r'^wishlist/move/(\d+)/(\d+)/', wishviews.move_book, name = 'move_book'),
-    url(r'^wishlist/deletelist/(\d+)/', wishviews.delete_wish_list, name = 'delete_wish_list')
+    url(r'^wishlist/deletelist/(\d+)/', wishviews.delete_wish_list, name = 'delete_wish_list'),
+    url(r'^wishlist/(\d+)/edit/', wishviews.edit_list, name = 'edit_list')
 ]
 
 

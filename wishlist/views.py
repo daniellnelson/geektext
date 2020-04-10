@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from .forms import WishlistForm, AddToListForm, MoveToListForm
+from .forms import WishlistForm, AddToListForm, MoveToListForm, EditListForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -84,4 +84,15 @@ def move_book(request, bookid, wishid):
             list = form.cleaned_data['field']
             list.user = request.user
             list.books.add(bookobject)
+            return redirect('current_wish_list', list.id)
+
+@login_required
+def edit_list(request, wishid):
+    list = Wishlist.objects.get(id=wishid)
+    if request.method == 'GET':
+        return render(request, 'wishlist/edit.html', {'form': EditListForm(instance=list)})
+    else:
+        form = EditListForm(request.POST, instance=list)
+        if form.is_valid():
+            form.save()
             return redirect('current_wish_list', list.id)
