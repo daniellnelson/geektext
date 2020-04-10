@@ -31,7 +31,6 @@ class BookView(DetailView):
     model = Book
     template_name = 'book_detail.html'
 
-<<<<<<< HEAD
 """def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=Book.slug)
     order_item = OrderItem.objects.create(item=item)
@@ -53,8 +52,6 @@ class BookView(DetailView):
         return redirect("book_detail", slug=slug)"""
 
 
-=======
->>>>>>> parent of 77b3fac... added add-to-cart in details.views and in urls
 
     
 

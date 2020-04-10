@@ -10,9 +10,6 @@ from details.models import Book
 from .models import Order, OrderItem
 from django.contrib import messages
 
-
-
-
 class CheckoutView(View):
     model = Book
     template_name = "checkout.html"
@@ -27,7 +24,7 @@ def item_list(request):
 
 #def add_to_cart(request, slug):
 
-@login_required
+
 def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=Book.slug)
     order_item = OrderItem.objects.create(item=item)

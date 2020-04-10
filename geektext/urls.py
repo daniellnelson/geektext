@@ -14,15 +14,7 @@ from details.views import (
     HomeView,
     BookView
 )
-<<<<<<< HEAD
-from Shopping_cart import (
-=======
 from Shopping_cart import views as cart_views
->>>>>>> parent of 77b3fac... added add-to-cart in details.views and in urls
-
-    views as cart_views
-
-)
 from Shopping_cart.views import (
     CheckoutView,
     add_to_cart
@@ -38,14 +30,9 @@ urlpatterns = [
     #url(r'^details/(\d+)/', views.book_detail, name='book_detail'), 
 
     #current url pattern for book detials
-<<<<<<< HEAD
     path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
     path('', HomeView.as_view(), name='home'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
-=======
-    path('book_details/<slug>/', BookView.as_view(), name='book_detail'),
-    
->>>>>>> parent of 77b3fac... added add-to-cart in details.views and in urls
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
     url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),
@@ -53,13 +40,8 @@ urlpatterns = [
     url(r'^wishlist/create/', wishviews.create_wish_list, name='create_wish_list'),
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
-<<<<<<< HEAD
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list')
     #path('checkout/', CheckoutView.as_view(template_name='checkout.html'), name='checkout'),
-=======
-    url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
-    #path('checkout/', CheckoutView.as_view(), name='checkout'),
->>>>>>> parent of 77b3fac... added add-to-cart in details.views and in urls
 
     #path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart') use once add_to_cart is implemented
 ]
