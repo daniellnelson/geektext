@@ -9,66 +9,34 @@ from geekprofile.models import Profile  #Use from geekprofile
 from details.models import Book       #Use from details
 from django.shortcuts import reverse
 
-#from django_countries.fields import CountryField
-
-
-
-
-class Item(models.Model):
-    title = Book.title
-    price = Book.cost
-    isbn  = Book.ISBN
-    slug  = Book.slug
-
-    def __str__(self):
-        return self.title
-"""
-    def get_absolute_url(self):
-        return reverse("geektext:book_detail", kwargs={
-            'slug': self.slug
-        })
-
-    def get_add_to_cart_url(self):
-        return reverse("geektext:add-to-cart", kwargs={
-            'slug': self.slug
-        })
-
-    def get_remove_from_cart_url(self):
-        return reverse("geektext:remove-from-cart", kwargs={
-            'slug': self.slug
-        })
-"""
-
 
 class OrderItem(models.Model):
-    item = models.ForeignKey(Item,on_delete=models.CASCADE)
-    is_ordered = models.BooleanField(default=False)
+    #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    #item = models.ForeignKey(Book, on_delete=models.CASCADE)
+    #item = models.ForeignKey(Book,on_delete=models.CASCADE)
+
+    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    item = models.OneToOneField(Book, on_delete=models.SET_NULL, null=True)
+    
+    #ordered = models.BooleanField(default=False)
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
     quantity = models.IntegerField(default=1)
 
-    """
-    def __str__(self):
-        return self.item.name
-    """
+    """def __str__(self):
+        return f"{self.quantity} of { Book.title }"""
 
     def __str__(self):
-        return f"{self.quantity} of {self.item.title}"
-
-
+        return self.item.title
     
-
-
 class Order(models.Model):
 
     #associate the order with a user
-    ref_code = models.CharField(max_length=15, null=True)
+    #ref_code = models.CharField(max_length=15, null=True)
+    #user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
 
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-
-    owner = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     
     #items in the order
     items = models.ManyToManyField(OrderItem)
@@ -85,20 +53,24 @@ class Order(models.Model):
         return sum([item.product.price for item in self.items.all()])
 
     def __str__(self):
-        return '{0} - {1}'.format(self.owner, self.ref_code)
+        return self.user.username
 
-    class Transaction(models.Model):
-        profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-        token = models.CharField(max_length=120)
-        order_id = models.CharField(max_length=120)
-        amount = models.DecimalField(max_digits=100, decimal_places=2)
-        success = models.BooleanField(default=True)
-        timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
-        def __str__(self):
-            return self.order_id
-"""
+    
+    
+
+"""class Transaction(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    token = models.CharField(max_length=120)
+    order_id = models.CharField(max_length=120)
+    amount = models.DecimalField(max_digits=100, decimal_places=2)
+    success = models.BooleanField(default=True)
+    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
+
+    def __str__(self):
+       return self.order_id
+
     class Meta:
         ordering = ['-timestamp']
-        """
-    
+        
+    """

@@ -22,10 +22,6 @@ def book_detail(request, id):
         raise Http404('Book Not Found')
     return render(request, 'book_detail.html', {'book': book})
     """
-
-
-
-
 #New Class-based Views
 
 class HomeView(ListView):
@@ -34,14 +30,12 @@ class HomeView(ListView):
 
 
 class BookView(DetailView):
-    #model = Book
-    #template_name = 'book_detail.html'
     model = Book
     template_name = 'book_detail.html'
 
-def add_to_cart(request, slug):
+"""def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=Book.slug)
-    order_item = OrderItem.objects.create(item=slug)
+    order_item = OrderItem.objects.create(item=item)
 
     #check for order
     order_qs= Order.objects.filter(user=request.user, is_ordered=False)
@@ -49,7 +43,7 @@ def add_to_cart(request, slug):
         order = order_qs[0]
 
         #check if order item is in the order
-        if order.items.filter(item_slug = item.slug.exists):
+        if order.items.filter(item__slug = item.slug.exists):
             order_item.quantity += 1
             order_item.save()
         else:
@@ -57,7 +51,7 @@ def add_to_cart(request, slug):
             order = order.objects.create(user=request.user,ordered_date=ordered_date)
             order.items.add(order_item)
         
-        return redirect("book_detail", slug=slug)
+        return redirect("book_detail", slug=slug)"""
 
 
 
