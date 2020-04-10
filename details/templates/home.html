@@ -43,7 +43,16 @@
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost }}</p>
+
+  {% comment %}
 	<button>Add to Cart</Button>
+  {% endcomment %}
+
+  <a href= "{{ book.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+		Add to Cart
+		<i class="fas fa-shopping-cart ml-1"></i>
+	</a>
+
   <button>Add to Wishlist</Button>
   </div>
   {% endfor %}

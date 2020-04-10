@@ -49,8 +49,15 @@ class Book(models.Model):
             'slug': self.slug
         })
     
-    #FIX GENERATING UNIQUE SLUG USING MANUALLY ADDED SLUG IN ADMIN FOR TIMEBEING
-    """def _get_unique_slug(self):
+    def get_add_to_cart_url(self):
+        return reverse("book_detail", kwargs={
+            'slug': self.slug
+        })
+
+
+    
+    #FIX ME: GENERATING UNIQUE SLUG USING MANUALLY ADDED SLUG IN ADMIN FOR TIMEBEING
+    def get_unique_slug(self):
         slug= slugify(self.title)
         unique_slug = slug
         num = 1
@@ -58,15 +65,20 @@ class Book(models.Model):
             unique_slug = '{}-{}'.format(slug, num)
             num += 1
         return unique_slug
- 
+    """
     def save(self, *args, **kwargs):
         if not self.slug or self.slug == 'slugtest':
             self.slug = self._get_unique_slug()
         #super(Book,self).save(*args, **kwargs)
-        super().save(*args, **kwargs)"""
+        super().save(*args, **kwargs)
+        
+        
+
 
 
     def __unicode__(self):
         return self.slug
+
+"""
 
   

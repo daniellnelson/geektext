@@ -18,15 +18,11 @@ class Item(models.Model):
     title = Book.title
     price = Book.cost
     isbn  = Book.ISBN
-    quantity = models.IntegerField(default=1)
     slug  = Book.slug
-
-
-    
 
     def __str__(self):
         return self.title
-
+"""
     def get_absolute_url(self):
         return reverse("geektext:book_detail", kwargs={
             'slug': self.slug
@@ -41,6 +37,7 @@ class Item(models.Model):
         return reverse("geektext:remove-from-cart", kwargs={
             'slug': self.slug
         })
+"""
 
 
 class OrderItem(models.Model):
@@ -49,8 +46,15 @@ class OrderItem(models.Model):
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
 
+    quantity = models.IntegerField(default=1)
+
+    """
     def __str__(self):
         return self.item.name
+    """
+
+    def __str__(self):
+        return f"{self.quantity} of {self.item.title}"
 
 
     

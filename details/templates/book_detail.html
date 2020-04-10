@@ -47,7 +47,21 @@
 		          {% if book.dimensions %}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
+
+
+
+					{% comment %} olf add to cart button
 		          <button class="contents_clicker"> Add to Cart</Button>
+				  	{% endcomment %}
+
+					<a href= "{{ book.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+					Add to Cart
+					<i class="fas fa-shopping-cart ml-1"></i>
+					</a>
+				
+
+
+
               <button class="contents_clicker">Add to Wishlist</Button>
         </div>
 		
