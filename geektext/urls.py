@@ -40,8 +40,12 @@ urlpatterns = [
     url(r'^wishlist/create/', wishviews.create_wish_list, name='create_wish_list'),
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
-    url(r'^shopping_cart/', cart_views.item_list, name = 'item-list')
-    #path('checkout/', CheckoutView.as_view(template_name='checkout.html'), name='checkout'),
+    url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
+    url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list'),
+    url(r'^wishlist/delete/(\d+)/(\d+)/', wishviews.delete_book, name = 'delete_book'),
+    url(r'^wishlist/move/(\d+)/(\d+)/', wishviews.move_book, name = 'move_book'),
+    url(r'^wishlist/deletelist/(\d+)/', wishviews.delete_wish_list, name = 'delete_wish_list'),
+    url(r'^wishlist/(\d+)/edit/', wishviews.edit_list, name = 'edit_list')
 
     #path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart') use once add_to_cart is implemented
 ]

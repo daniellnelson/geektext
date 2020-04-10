@@ -1,5 +1,5 @@
+{% block content %}
 {% load static %}
-<html>
 <head>
        <title>GeekText</title>
        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -20,30 +20,13 @@
    <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
  {% endif %}
 </div>
-<div>
-<h1>My Wish Lists</h1>
 
-<a href="{% url 'create_wish_list' %}">Create New List</a>
-{% if messages %}
-  {% for message in messages %}
-    <div>
-      {{ message }}
-    </div>
-  {% endfor %}
-{% endif %}
+<h1>Edit Your Wishlist</h1>
 
-<ul>
-  {% for list in lists %}
-    <h3><a href="{% url 'current_wish_list' list.id %}">{{list.listname}}</a></h3>
-    <p>Created on: {{ list.created }}</p>
-      {% for book in list.books.all %}
-        <ul>
-          <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
-        </ul>
-      {% empty %}
-        <p>This list is empty.</li>
-      {% endfor %}
-  {% endfor %}
-</ul>
-</div>
-</html>
+<form method="POST">
+  {% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Submit Changes</button>
+</form>
+
+{% endblock %}

@@ -43,15 +43,13 @@
 	{% endif %}
 	<p class="hidden">{{book.condition }}</p>
 	<p>Price: ${{ book.cost }}</p>
-	<button>Add to Cart</Button>
-  {% endcomment %}
 
-  <a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+	<a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
 		Add to Cart
 		<i class="fas fa-shopping-cart ml-1"></i>
 	</a>
-
-  <button>Add to Wishlist</Button>
+  
+  <a href="{% url 'add_to_list' book.id %}"><button>Add to Wishlist</Button></a>
   </div>
   {% endfor %}
 </ul>
