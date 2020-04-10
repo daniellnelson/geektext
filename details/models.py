@@ -69,7 +69,6 @@ class Book(models.Model):
             self.slug = self._get_unique_slug()
         #super(Book,self).save(*args, **kwargs)
         super().save(*args, **kwargs)
-        
 
 
     def __unicode__(self):

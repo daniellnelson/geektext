@@ -4,7 +4,6 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import reverse
 from .models import Book
-from Shopping_cart.models import Order, OrderItem
 
 
 #Old Function-based views

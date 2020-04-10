@@ -10,6 +10,8 @@ from details.models import Book       #Use from details
 from django.shortcuts import reverse
 
 
+
+
 class OrderItem(models.Model):
     #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     #item = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -28,7 +30,6 @@ class OrderItem(models.Model):
         return f"{self.quantity} of { Book.title }"""
 
     def __str__(self):
-    
         return self.item.name
 
 class Order(models.Model):
