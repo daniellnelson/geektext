@@ -27,7 +27,9 @@ def item_list(request):
 @login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Book, slug=slug)
-    order_item = OrderItem.objects.create(item=item)
+    order_item, created = OrderItem.objects.get_or_create(item=item, user=request.user, ordered=False)
+    # order_item = OrderItem.objects.create(item=item)
+
     #check for order
     order_qs = Order.objects.filter(user=request.user, ordered=False)
 
@@ -35,12 +37,15 @@ def add_to_cart(request, slug):
     print(order_qs)
     print("-------ORDER QUERY SET MADE--------")
 
+
     if order_qs.exists():
         order = order_qs[0]
         #check if order item is in the order
         if order.items.filter(item__slug = item.slug).exists:
             order_item.quantity += 1
             order_item.save()
+        else:
+            order.items.add(order_item)
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user,
@@ -48,10 +53,10 @@ def add_to_cart(request, slug):
         order.items.add(order_item)
         
     return redirect("book_detail", slug=slug)
-    """return reverse("book_detail", kwargs={
-        'slug' : slug
-    })"""
 
+
+
+    
 
 
 

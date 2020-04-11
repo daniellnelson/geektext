@@ -35,12 +35,20 @@ class Item(models.Model):
         })
 
 class OrderItem(models.Model):
-    item = models.ForeignKey(Book,on_delete=models.CASCADE)
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                 on_delete=models.CASCADE, blank=True, null=True)
+                 
     ordered = models.BooleanField(default=False)
+    item = models.ForeignKey(Book,on_delete=models.CASCADE)
+   
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
+    
+    quant_flag = models.BooleanField(default=True)
 
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)
+
 
     """def __str__(self):
         return self.item.title"""
