@@ -50,7 +50,7 @@ def remove_from_cart(request,slug):
             order.items.remove(order_item)
             order_item.delete()
             messages.info(request, "This item was removed from your cart.")
-
+            return redirect("book_detail", slug=slug)
 
         else:
             #add a message saying the order does not contain the item
@@ -59,10 +59,10 @@ def remove_from_cart(request,slug):
 
     else:
         #add a message saying the user does have an order
-        messages.info(request, "User does not have an order!")
+        messages.info(request, "You do not have an order!")
         return redirect("book_detail", slug=slug)
 
-    return redirect("book_detail", slug=slug)
+    #return redirect("book_detail", slug=slug)
 
 @login_required
 def add_to_cart(request, slug):
@@ -75,11 +75,6 @@ def add_to_cart(request, slug):
     #check for order
     order_qs = Order.objects.filter(user=request.user, ordered=False)
 
-    print("-------ORDER QUERY SET MADE--------")
-    print(order_qs)
-    print("-------ORDER QUERY SET MADE--------")
-
-
     if order_qs.exists():
         order = order_qs[0]
         #check if order item is in the order
@@ -88,9 +83,10 @@ def add_to_cart(request, slug):
             order_item.save()
             messages.info(request, "This item quantity has been updated")
 
-        else:
-            messages.info(request, "This item has been added to your cart")
+        else:           
             order.items.add(order_item)
+            messages.info(request, "This item has been added to your cart")
+            return redirect("book_detail", slug=slug)
 
     else:
         ordered_date = timezone.now()
@@ -98,6 +94,8 @@ def add_to_cart(request, slug):
                                     ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item has been added to your cart")
+        return redirect("book_detail", slug=slug)
+        
         
     return redirect("book_detail", slug=slug)
 

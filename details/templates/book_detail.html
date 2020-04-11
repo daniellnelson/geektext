@@ -18,6 +18,17 @@
 	         <a href="{% url 'all_wish_list'%}">Wish List</a>
 	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
       </div>
+
+	{% if messages %}
+			
+    		{% for message in messages %}
+			<div class="alert alert-{{ message.tags }}" role="alert">
+  				{{ message }}
+			</div>
+    		{% endfor %}
+			
+	{% endif %}
+
       <div class="details">
 	       <img data-enlargable width="250" style="cursor: zoom-in" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
       </div>
