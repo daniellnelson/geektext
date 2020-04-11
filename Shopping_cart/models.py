@@ -8,6 +8,8 @@ from django.db.models import Sum
 from geekprofile.models import Profile  #Use from geekprofile
 from details.models import Book       #Use from details
 from django.shortcuts import reverse
+from django.http import HttpResponse
+
 
 
 class Item(models.Model):
@@ -40,9 +42,11 @@ class OrderItem(models.Model):
 
     quantity = models.IntegerField(default=1)
 
-    
+    """def __str__(self):
+        return self.item.title"""
+
     def __str__(self):
-        return self.item.name
+        return f"{self.quantity} of {self.item.title}"
     
 
     
@@ -55,10 +59,9 @@ class Order(models.Model):
     #associate the order with a user
     ref_code = models.CharField(max_length=15, null=True)
 
-    """user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
-    user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+    #user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     
     #items in the order
     items = models.ManyToManyField(OrderItem)
@@ -68,14 +71,8 @@ class Order(models.Model):
     #checks if order was ordered
     ordered = models.BooleanField(default=False)
 
-    def get_cart_items(self):
-        return self.items.all()
-    
-    def get_cart_total(self):
-        return sum([item.product.price for item in self.items.all()])
-
     def __str__(self):
-        return '{0} - {1}'.format(self.owner, self.ref_code)
+        return self.user.username
 
     """class Transaction(models.Model):
         profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
