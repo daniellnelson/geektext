@@ -32,6 +32,7 @@ urlpatterns = [
     #current url pattern for book detials
     path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
     path('', HomeView.as_view(), name='home'),
+    url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
@@ -40,7 +41,6 @@ urlpatterns = [
     url(r'^wishlist/create/', wishviews.create_wish_list, name='create_wish_list'),
     url(r'wishlist/current/(\d+)/', wishviews.current_wish_list, name='current_wish_list'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
-    url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
     url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list'),
     url(r'^wishlist/delete/(\d+)/(\d+)/', wishviews.delete_book, name = 'delete_book'),
     url(r'^wishlist/move/(\d+)/(\d+)/', wishviews.move_book, name = 'move_book'),
