@@ -17,7 +17,8 @@ from details.views import (
 from Shopping_cart import views as cart_views
 from Shopping_cart.views import (
     CheckoutView,
-    add_to_cart
+    add_to_cart,
+    remove_from_cart
 )
 
 
@@ -34,6 +35,9 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
+    path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
+
+
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
     url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),

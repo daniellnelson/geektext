@@ -51,6 +51,10 @@
 				  <a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
 					Add to Cart!
 					<i class="fas fa-shopping-cart ml-1"></i>
+
+				<a href= "{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+					Remove from cart
+					<i class="fas fa-shopping-cart ml-1"></i>
 				</a>
               <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
 	         </div>
