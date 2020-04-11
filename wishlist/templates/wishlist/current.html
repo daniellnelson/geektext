@@ -43,7 +43,7 @@
             {% csrf_token %}
           <button type="submit">Move To A Different List</button>
           </form>
-          <form method="POST" action="{% url 'add_to_cart' book.id %}">
+          <form method="POST" action="{{ object.get_add_to_cart_url }}">
             {% csrf_token %}
           <button type="submit">Add To Cart</button>
           </form>
