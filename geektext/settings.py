@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'details',
     'wishlist',
     'geekprofile',
-    'Shopping_cart'
+    'Shopping_cart',
+    'crispy_forms',
 
 ]
 

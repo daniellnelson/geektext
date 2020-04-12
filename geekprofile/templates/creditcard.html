@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+  <h2 class = address>Credit Cards</h2>
+  <hr>
+  <div class = address>
+    <form method = 'POST' class= 'uniForm' >
+        {{ cform.management_form}}
+        {% csrf_token%}
+        <div>
+            {% for form in cform %}
+            <table >
+              {{ form.as_table }}
+            </table>
+            <hr>
+            {% endfor %}
+        </div>
+        <button method = 'POST' type = submit>
+          Update
+        </button>
+      </form>
+  </div>
+{% endblock %}

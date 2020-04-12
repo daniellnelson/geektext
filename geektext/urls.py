@@ -24,7 +24,11 @@ urlpatterns = [
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
     url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),
     url(r'^profile/', profile_views.profile_detail, name = 'profile_detail'),
+    url(r'^edit/', profile_views.profile_edit, name = 'profile_edit'),
+    url(r'^creditcards/', profile_views.profile_cards, name = 'profile_cards'),
+    url(r'^password/', auth_views.PasswordChangeView.as_view(success_url = '/login/',  template_name='profile_password.html'), name = 'profile_password'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name='login.html')),
     #path('', include('Shopping_cart.urls'), namespace='cart')
 ]
 

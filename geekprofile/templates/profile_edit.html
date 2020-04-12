@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+<h1> Edit Profile </h1>
+{% block content %}
+    <div class = "address">
+      <form method="POST">
+        {% csrf_token %}
+        {{ a_form.management_form }}
+
+        {{u_form.as_p}}
+        {{p_form.as_p}}
+        <button type="submit">
+            Update
+        </button>
+        <div>
+            {% for form in a_form %}
+              <hr>
+              <table>
+                 {{form.as_table }}
+              </table>
+              <button type="submit">
+                Update
+              </button>
+              <hr>
+            {% endfor %}
+      </div>
+      </form>
+    </div>
+{% endblock content %}
