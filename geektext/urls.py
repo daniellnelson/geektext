@@ -38,7 +38,7 @@ urlpatterns = [
     #current url pattern for book detials and home
 
     path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
-    #url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
+    url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
 
     url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
     url(r'^details/review/all/(\d+)/', ratings_views.display_reviews, name = 'display_reviews'),
