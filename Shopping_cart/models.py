@@ -44,39 +44,25 @@ class OrderItem(models.Model):
    
     date_added = models.DateTimeField(auto_now=True)
     date_ordered = models.DateTimeField(null=True)
-    
-    quant_flag = models.BooleanField(default=True)
 
     quantity = models.IntegerField(default=0)
 
-
-    """def __str__(self):
-        return self.item.title"""
-
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
+    
+    def get_total_item_price(self):
+        return self.quantity * self.item.price
 
     
-
-    
-
-    
-
-    
-
 
 class Order(models.Model):
 
     #associate the order with a user
-    ref_code = models.CharField(max_length=15, null=True)
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-    #user = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
     
     #items in the order
     items = models.ManyToManyField(OrderItem)
-    item_count = models.IntegerField(default=0)
     
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
@@ -87,26 +73,8 @@ class Order(models.Model):
     def __str__(self):
         return self.user.username
     
-    def get_item_count(self):
-        qs = self.objects.filter(
-            user=user,
-            ordered=False
-        )
-        print("PASSED QS LINE")
-        if qs.exists():
-            print("QS EXISTS!")
-            count  = qs[0].items.count()
-            return count
-            print("QS ITEM COUNT ", count )
-        return 1234
-
-    """class Transaction(models.Model):
-        profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-        token = models.CharField(max_length=120)
-        order_id = models.CharField(max_length=120)
-        amount = models.DecimalField(max_digits=100, decimal_places=2)
-        success = models.BooleanField(default=True)
-        timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-
-        def __str__(self):
-            return self.order_id"""
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()  
+        return total

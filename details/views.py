@@ -8,7 +8,7 @@ from .models import Book
 
 #Old Function-based views
 
-"""
+
 def home(request):
     books = Book.objects.all()
     return render(request, 'home.html', {'books': books})
@@ -19,7 +19,7 @@ def book_detail(request, id):
     except Book.DoesNotExist:
         raise Http404('Book Not Found')
     return render(request, 'book_detail.html', {'book': book})
-    """
+
 #New Class-based Views
 
 class HomeView(ListView):

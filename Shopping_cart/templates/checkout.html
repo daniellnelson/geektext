@@ -306,13 +306,14 @@
 
           <!-- Cart -->
           <ul class="list-group mb-3 z-depth-1">
+            {% for order_item in object.items.all %}
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0">{{ order_item.item.title }}</h6>
+                <small class="text-muted">Quantity: {{ order_item.quantity }}</small>
               </div>
-              <span class="text-muted">$12</span>
-              <a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
+              <span class="text-muted">${{ order_item.item.cost }}</span>
+              <a href= "{{ order_item.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
                 Add to Cart!
                 <i class="fas fa-shopping-cart ml-1"></i>
 
@@ -320,26 +321,8 @@
                 Remove from cart
                 <i class="fas fa-shopping-cart ml-1"></i>
               </a>
-
-
-
-
-
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
+            {% endfor %}
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
                 <h6 class="my-0">Promo code</h6>
