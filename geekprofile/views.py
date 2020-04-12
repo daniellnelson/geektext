@@ -93,7 +93,9 @@ def profile_edit(request):
 @login_required
 def profile_cards(request):
 
-    cformset = modelformset_factory(CreditCard, fields = ('number','expire','code', 'zipcode'),can_delete = True )
+    cformset = modelformset_factory(CreditCard,
+    fields = ('number','expire','code', 'zipcode'),can_delete = True,
+    labels = {'number':'Card Number','expire':'Expire MM/YYYY','code': 'CCV', 'zipcode': 'Zipcode'} )
     p = request.user.profile
     cardset = CreditCard.objects.filter(profile = p)
 
