@@ -33,7 +33,7 @@
 <ul>
   {% for book in books %}
   <div class="booktitle">
-		<a href="{%url 'book_detail' book.id%}">
+		<a href="{% url 'book_detail' book.slug %}">
 		<img src="{{ book.cover.url}}" alt="{{book.author.firstName|capfirst }} {{book.author.lastName|capfirst }}"/>
 		</a>
 		<p>{{book.title}}</p>
