@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
+        <link rel="stylesheet" href="{% static 'css/form.css' %}">
       </head>
       <div class="logo">
           <h1>GeekText</h1>
@@ -19,10 +20,13 @@
       </div>
 {% if book %}
 <div>
-  <h1>Write a review for {{book.title}}</h1>
+  <div class="title">
+    <h3>Write a review for {{book.title}}</h3>
+  </div>
   {% if user.is_authenticated %}
+  <div class="form">
     <form method="post" class="col-md-4">
-    <h3>Leave a Review</h3>
+    <h4>Leave a Review</h4>
     {% csrf_token %}
 
     <div>
@@ -53,7 +57,7 @@
       </div>
     </div>
   </form>
-
+  </div>
   {% else %}
   <div class="col-md-4">
     <h4>Must be logged in to review!</h4>
