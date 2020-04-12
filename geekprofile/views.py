@@ -126,7 +126,7 @@ def profile_cards(request):
             return redirect('profile_cards')
         else:
             messages.error(request, f'Error check the information typed.')
-            
+
 
     else:
             cform = cformset(queryset = cardset)
