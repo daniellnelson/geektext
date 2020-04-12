@@ -24,18 +24,19 @@
     <h3>Write a review for {{book.title}}</h3>
   </div>
   {% if user.is_authenticated %}
-  <div class="form">
-    <form method="post" class="col-md-4">
-    <h4>Leave a Review</h4>
-    {% csrf_token %}
+    <!-- {% if purchased %} -->
+    <div class="form">
+      <form method="post" class="col-md-4">
+        <h4>Leave a Review</h4>
+        {% csrf_token %}
 
-    <div>
-      <div class="row">
-        <div class="form-group col-md-12">
-          <label>Rating</label>
-          {{ form.rating }}
+      <div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label>Rating</label>
+            {{ form.rating }}
+          </div>
         </div>
-      </div>
 
       <div class="row">
         <div class="form-group col-md-12">
@@ -44,20 +45,25 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="form-group col-md-3">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
 
-        <div class="form-check col-md-9" style="float:left">
-          {{ form.anonymous }}
-          <label>Post anonymously?</label>
-        </div>
+          <div class="form-check col-md-9" style="float:left">
+            {{ form.anonymous }}
+            <label>Post anonymously?</label>
+          </div>
 
+        </div>
       </div>
+    </form>
     </div>
-  </form>
-  </div>
+    <!-- {% else %}
+    <div class="col-md-4">
+        <h4>I'm sorry, you must purchase the book to review</h4>
+    </div>
+    {% endif %} -->
   {% else %}
   <div class="col-md-4">
     <h4>Must be logged in to review!</h4>
