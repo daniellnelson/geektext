@@ -1,0 +1,47 @@
+{% extends "base_f.html" %}
+
+{% block content %}
+    <main> 
+    <div class="container">
+
+        <div class="table-responsive text-nowrap">
+        <h2> Shopping Cart </h2>
+
+        <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Item Price</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for order_item in object.items.all %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.item.title }}</td>
+            <td>{{ order_item.item.price }}</td>
+            <td>{{ order_item.quantity }}</td>
+            <td>IMPLEMENT TOTAL</td>
+            
+          </tr>
+          {% endfor %}
+          
+         
+          
+        </tbody>
+        </table>
+
+</div>
+    
+    
+    </div>
+    
+    </main>
+
+
+
+{% endblock content %}

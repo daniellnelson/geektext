@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from .models import Book
+from .models import Book, Author
 
-@admin.register(Book)
+
+@admin.register(Book,Author)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'cover', 'author','genre', 'condition', 'type', 'cost', 'pages']
+    pass

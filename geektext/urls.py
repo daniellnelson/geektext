@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name ='home'),
     url(r'^details/(\d+)/', views.book_detail, name='book_detail'),
+    url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),
     url(r'^logout/', auth_views.LogoutView.as_view(template_name = 'logout.html'), name = 'profile_logout'),
     url(r'^signup/', profile_views.profile_signup, name = 'profile_signup'),
@@ -29,7 +30,11 @@ urlpatterns = [
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
     url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
     url(r'^details/review/all/(\d+)/', ratings_views.display_reviews, name = 'display_reviews'),
-        url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list')
+    url(r'^wishlist/add/(\d+)/', wishviews.add_to_list, name = 'add_to_list'),
+    url(r'^wishlist/delete/(\d+)/(\d+)/', wishviews.delete_book, name = 'delete_book'),
+    url(r'^wishlist/move/(\d+)/(\d+)/', wishviews.move_book, name = 'move_book'),
+    url(r'^wishlist/deletelist/(\d+)/', wishviews.delete_wish_list, name = 'delete_wish_list'),
+    url(r'^wishlist/(\d+)/edit/', wishviews.edit_list, name = 'edit_list')
 ]
 
 

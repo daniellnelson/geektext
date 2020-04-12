@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'geekprofile',
     'Shopping_cart',
     'ratings',
+    
 ]
 
 MIDDLEWARE = [
