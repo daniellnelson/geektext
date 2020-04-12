@@ -34,7 +34,7 @@
     <p>Created on: {{ list.created }}</p>
       {% for book in list.books.all %}
         <ul>
-          <li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>
+          <li><a href="{% url 'book_detail' book.slug %}">{{ book.title }}</a></li>
           <form method="POST" action="{% url 'delete_book' book.id list.id %}">
             {% csrf_token %}
           <button type="submit">Remove From List</button>
