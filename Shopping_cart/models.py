@@ -55,6 +55,9 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
+
+    
+
     
 
     
@@ -73,6 +76,7 @@ class Order(models.Model):
     
     #items in the order
     items = models.ManyToManyField(OrderItem)
+    item_count = models.IntegerField(default=0)
     
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
@@ -82,6 +86,19 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    def get_item_count(self):
+        qs = self.objects.filter(
+            user=user,
+            ordered=False
+        )
+        print("PASSED QS LINE")
+        if qs.exists():
+            print("QS EXISTS!")
+            count  = qs[0].items.count()
+            return count
+            print("QS ITEM COUNT ", count )
+        return 1234
 
     """class Transaction(models.Model):
         profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

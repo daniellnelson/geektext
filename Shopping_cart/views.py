@@ -10,10 +10,33 @@ from geekprofile.models import Profile
 from details.models import Book
 from .models import Order, OrderItem
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ObjectDoesNotExist
+
 
 class CheckoutView(View):
     model = Book
     template_name = "checkout.html"
+
+
+class OrderSummaryView(LoginRequiredMixin,View):
+    def get(self, *args, **kwargs):
+
+        try:
+            order = Order.objects.get(
+                user=self.request.user,
+                ordered=False
+            )
+            context = {
+
+                'object': order
+
+            }
+            return render(self.request, 'order_summary.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("/")
+        
 
 
 def item_list(request):
@@ -90,7 +113,7 @@ def add_to_cart(request, slug):
         order = order_qs[0]
         #check if order item is in the order
         if order.items.filter(item__slug = item.slug).exists:
-            order_item.quantity += 1
+            order_item.quantity += 1          
             order_item.save()
             messages.info(request, "This item quantity has been updated")
 
@@ -104,6 +127,7 @@ def add_to_cart(request, slug):
         order = Order.objects.create(user=request.user,
                                     ordered_date=ordered_date)
         order.items.add(order_item)
+        order.item_count += 1
         messages.info(request, "This item has been added to your cart")
         return redirect("book_detail", slug=slug)
         

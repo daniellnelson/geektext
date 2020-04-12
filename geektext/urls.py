@@ -17,6 +17,7 @@ from details.views import (
 from Shopping_cart import views as cart_views
 from Shopping_cart.views import (
     CheckoutView,
+    OrderSummaryView,
     add_to_cart,
     remove_from_cart
 )
@@ -34,6 +35,7 @@ urlpatterns = [
     path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
     path('', HomeView.as_view(), name='home'),
     url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
+    path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
 
