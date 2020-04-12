@@ -2,7 +2,7 @@ You're gonna rate the book
 
 {% load static %}
 
-{%block content%}
+{% block content %}
   <h2>Please rate {{book.title}}</h2>
   <div class="card-body">
     <form method="get" style="margin-top: 1.3em;">
@@ -11,4 +11,4 @@ You're gonna rate the book
         <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </form>
   </div>
-{%endblock%}
+{% endblock %}

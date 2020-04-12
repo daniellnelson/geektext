@@ -4,7 +4,6 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import reverse
 from .models import Book
-from .models import Author
 
 
 #Old Function-based views
@@ -19,7 +18,7 @@ def book_detail(request, id):
         book = Book.objects.get(id=id)
     except Book.DoesNotExist:
         raise Http404('Book Not Found')
-    return render(request, 'book_detail.html', {'book': books})
+    return render(request, 'book_detail.html', {'book': book})
 
 def author_books(request, id):
     try: 
@@ -33,12 +32,12 @@ def author_books(request, id):
 
 #New Class-based Views
 
+#make a DetailView for the Author
+
 class HomeView(ListView):
     model = Book
     template_name = 'home.html'
-    #paginate_by = 1
-
-
+    
 class BookView(DetailView):
     model = Book
     template_name = 'book_detail.html'

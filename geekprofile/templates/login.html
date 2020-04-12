@@ -1,21 +1,19 @@
-<h1>Login page</h1>
-<a href = "{% url 'home' %}" >Home</a>
-{% block content %}
-    <div class = "profile_content">
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div>
-          <button type="Login">
-            Log in
-          </button>
+{% extends "base.html" %}
+    {% block content %}
+        <div class = "profile_login">
+          <h1 id = login >Login page</h1>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+              <button type="Login">
+                Log in
+              </button>
+            </div>
+          </form>
+          <small>
+            New to the site? <a href = ' {%url 'profile_signup' %}'>Sign up</a>
+          </small>
         </div>
-      </form>
 
-    </div>
-    <div>
-      <small>
-        New to the site? <a href = ' {%url 'profile_signup' %}'>Sign up</a>
-      </small>
-    </div>
-{% endblock content %}
+    {% endblock content %}

@@ -1,6 +1,5 @@
 {% load static %}
 {% load review %}
-
 <!DOCTYPE html>
 <html>
       <head>
@@ -18,15 +17,18 @@
 	         <a>Search</a>
 	         <a href="{% url 'item-list' %}">Shopping Cart</a>
 	         <a href="{% url 'all_wish_list'%}">Wish List</a>
-	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
+	         {% if user.is_authenticated %}
+					<a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+				{% else %}
+					<a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+			{% endif %}
       </div>
 
 
 
-	<!--Cart Alerts! FIX ME: DISMISSING THE ALERT!-->
+	<!--Cart Alerts!-->
 	<div class="mt-9 pt-4">	
-			{% if messages %}
-			
+			{% if messages %}			
     			{% for message in messages %}
 
 					
@@ -36,24 +38,10 @@
   						{{ message }}
 						  
 					</div>
-					
-
-					{% comment %}
-					<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-							{{ message }}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-					</div>
-					{% endcomment %}
-
-					
-
     			{% endfor %}
-			
 			{% endif %}			
-	
 	</div>
+	<!--Cart Alerts!-->
 
 	
 
@@ -64,14 +52,18 @@
       </div>
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
-		   <p><a href="{%url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
+		   <!--Use this when the author model and view are situated-->
+		   {% comment %}
+
+		   <p><a href="{% url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
+		   
+			{% endcomment %}
+		   <p>Written By:  <a>{{book.author}}</a></p> 
 	        <div class="contents_overview">
 		          {% if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
-	        </div>
-	  <div class="contents_suboverview">
-		          {%if book.genre%}
+		          {% if book.genre %}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
 		          <p>{{ book.publisher }}</p>
@@ -91,6 +83,8 @@
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
 
+				  <p>Average Rating: {% include 'rating.html' %}</p>
+
 				  <a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
 					Add to Cart!
 					<i class="fas fa-shopping-cart ml-1"></i>
@@ -100,19 +94,19 @@
 					<i class="fas fa-shopping-cart ml-1"></i>
 				</a>
               <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
-	         </div>
-				   <p>Average Rating: {% include 'rating.html' %}</p>
-		          <button class="contents_clicker"> Add to Cart</Button>
-              <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
-			  {% if user.is_authenticated %}
-                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
-              {% endif %}
+					{% if user.is_authenticated %}
+						<h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
+					{% endif %}
+
+
 	         </div>
         </div>
-        <div>
+
+		<div>
         </br>
-          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
+          <h3><a href="{% url 'display_reviews' book.id %}">Comments for {{book.title}}</a></h3>
         </div>
+		
 </html>
 <script type="text/javascript">
 $('img[data-enlargable]').addClass('img-enlargable').click(function(){
