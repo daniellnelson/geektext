@@ -16,6 +16,11 @@ h3 {
 	margin-left: 50px;
 }
 
+h2 {
+	display: inline-block;
+	margin-left: 50px;
+}
+
 .details {
 	float: left;
 	max-width: 640px;
@@ -38,4 +43,3 @@ p {
 	font-family: 'Lobster';
 	margin-left: 50px;
 }
-

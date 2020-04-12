@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     'details',
     'wishlist',
     'geekprofile',
-    'Shopping_cart'
-
+    'Shopping_cart',
+    'ratings',
+    
 ]
 
 MIDDLEWARE = [

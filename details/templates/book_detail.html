@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <!DOCTYPE html>
 <html>
       <head>
@@ -8,26 +10,32 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/admin/css/book.css' %}">
       </head>
-      <div class="logo">
-          <h1>GeekText</h1>
-      </div>
-      <div class="topnav">
-	         <a href="{% url 'home' %}">Home</a>
-	         <a>Search</a>
-	         <a href="{% url 'item-list' %}">Shopping Cart</a>
-	         <a href="{% url 'all_wish_list'%}">Wish List</a>
-	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
-      </div>
+<div class="logo">
+	<h1>GeekText</h1>
+</div>
+<div class="topnav">
+	<a href="{% url 'home' %}">Home</a>
+	<a>Search</a>
+	<a href="{% url 'item-list' %}">Shopping Cart</a>
+	<a href="{% url 'all_wish_list'%}">Wish List</a>
+	{% if user.is_authenticated %}
+		<a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{%url 'profile_detail' %}">{{ user.username }}</a>
+	{% else %}
+		<a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+	{% endif %}
+</div>
       <div class="details">
 	       <img data-enlargable width="250" style="cursor: zoom-in" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
       </div>
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
-		   <p>Written By:  <a>{{book.author}}</a></p<
+		   <p><a href="{%url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
 	        <div class="contents_overview">
 		          {%if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
+	        </div>
+	  <div class="contents_suboverview">
 		          {%if book.genre%}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
@@ -47,10 +55,18 @@
 		          {%if book.dimensions%}
 			           <p>Dimensions: {{book.dimensions}}</p>
 		          {% endif %}
+				   <p>Average Rating: {% include 'rating.html' %}</p>
 		          <button class="contents_clicker"> Add to Cart</Button>
-              <button class="contents_clicker">Add to Wishlist</Button>
+              <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
+			  {% if user.is_authenticated %}
+                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
+              {% endif %}
+	         </div>
         </div>
-		
+        <div>
+        </br>
+          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
+        </div>
 </html>
 <script type="text/javascript">
 $('img[data-enlargable]').addClass('img-enlargable').click(function(){
