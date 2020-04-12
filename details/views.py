@@ -4,6 +4,7 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.shortcuts import reverse
 from .models import Book
+from .models import Author
 
 
 #Old Function-based views

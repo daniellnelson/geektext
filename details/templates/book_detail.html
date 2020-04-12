@@ -1,4 +1,6 @@
 {% load static %}
+{% load review %}
+
 <!DOCTYPE html>
 <html>
       <head>
@@ -62,12 +64,14 @@
       </div>
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
-		   <p>Written By:  <a>{{book.author}}</a></p<
+		   <p><a href="{%url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
 	        <div class="contents_overview">
 		          {% if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
 		          {% endif %}
-		          {% if book.genre %}
+	        </div>
+	  <div class="contents_suboverview">
+		          {%if book.genre%}
 			           <p>Genre: {{book.genre}}</p>
 		          {% endif %}
 		          <p>{{ book.publisher }}</p>
@@ -97,8 +101,18 @@
 				</a>
               <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
 	         </div>
+				   <p>Average Rating: {% include 'rating.html' %}</p>
+		          <button class="contents_clicker"> Add to Cart</Button>
+              <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
+			  {% if user.is_authenticated %}
+                <h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>
+              {% endif %}
+	         </div>
         </div>
-		
+        <div>
+        </br>
+          <h3><a href="{%url 'display_reviews' book.id%}">Comments for {{book.title}}</a></h3>
+        </div>
 </html>
 <script type="text/javascript">
 $('img[data-enlargable]').addClass('img-enlargable').click(function(){
