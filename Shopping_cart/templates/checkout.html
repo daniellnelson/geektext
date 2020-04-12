@@ -288,6 +288,13 @@
         <!--Grid column YOUR CART!-->
         {% comment %}<div class="col-md-4 mb-4">{% endcomment %}
         <div class="container">
+
+
+
+
+
+
+
         </div>
         <div class="col-md-8 mb-4">
 
@@ -297,18 +304,11 @@
             <span class="badge badge-secondary badge-pill">3</span>
           </h4>
 
-          <div class="container">
-
-
-          
-          </div>
-
           <!-- Cart -->
-          <div class="row">
-               <ul class="list-group mb-3 z-depth-1">
+          <ul class="list-group mb-3 z-depth-1">
             {% for order_item in object.items.all %}
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div class= >
+              <div>
                 <h6 class="my-0">{{ order_item.item.title }}</h6>
                 <small class="text-muted">Quantity: {{ order_item.quantity }}</small>
               </div>
@@ -335,13 +335,6 @@
               <strong>$20</strong>
             </li>
           </ul>
-          
-
-
-
-
-
-          </div>
           <!-- Cart -->
 
           <!-- Promo code -->

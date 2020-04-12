@@ -36,7 +36,7 @@ def author_books(request, id):
 class HomeView(ListView):
     model = Book
     template_name = 'home.html'
-    
+    #paginate_by = 1
 
 
 class BookView(DetailView):

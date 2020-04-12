@@ -42,10 +42,18 @@ class Book(models.Model):
         return self.title
 
     #added  by Ferris
+   
+
     slug = models.SlugField(max_length=150, unique=True)
+<<<<<<< HEAD
     
     #with slugs
     """def get_absolute_url(self):
+=======
+    #sluggy = models.SlugField(max_length=120, unique=True)
+    
+    def get_absolute_url(self):
+>>>>>>> parent of 22b1b11... Committing before merging with Master
         return reverse("book_detail", kwargs={
             'slug': self.slug
         })
@@ -76,6 +84,10 @@ class Book(models.Model):
             'id': self.id
         })
     
+
+
+
+    
     #FIX ME: GENERATING UNIQUE SLUG USING MANUALLY ADDED SLUG IN ADMIN FOR TIMEBEING
     def get_unique_slug(self):
         slug= slugify(self.title)
@@ -85,4 +97,14 @@ class Book(models.Model):
             unique_slug = '{}-{}'.format(slug, num)
             num += 1
         return unique_slug
-    
+    """
+    def save(self, *args, **kwargs):
+        if not self.slug or self.slug == 'slugtest':
+            self.slug = self._get_unique_slug()
+        #super(Book,self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
+        
+        
+    def __unicode__(self):
+        return self.slug
+"""
