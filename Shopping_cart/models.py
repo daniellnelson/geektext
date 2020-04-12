@@ -73,6 +73,7 @@ class Order(models.Model):
     
     #items in the order
     items = models.ManyToManyField(OrderItem)
+    
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     

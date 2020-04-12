@@ -19,15 +19,43 @@
 	         <a href="{% url 'profile_detail' %}">Log In | Sign Up</a>
       </div>
 
-	{% if messages %}
+
+
+	<!--Cart Alerts! FIX ME: DISMISSING THE ALERT!-->
+	<div class="mt-9 pt-4">	
+			{% if messages %}
 			
-    		{% for message in messages %}
-			<div class="alert alert-{{ message.tags }}" role="alert">
-  				{{ message }}
-			</div>
-    		{% endfor %}
+    			{% for message in messages %}
+
+					
+					<div class="alert alert-{{ message.tags }} alert-dissmissable" role="alert">
+					<span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+				
+  						{{ message }}
+						  
+					</div>
+					
+
+					{% comment %}
+					<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+							{{ message }}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+					</div>
+					{% endcomment %}
+
+					
+
+    			{% endfor %}
 			
-	{% endif %}
+			{% endif %}			
+	
+	</div>
+
+	
+
+	
 
       <div class="details">
 	       <img data-enlargable width="250" style="cursor: zoom-in" src="{{ book.cover.url}}" alt="{{ book.title }}"/>
@@ -63,7 +91,7 @@
 					Add to Cart!
 					<i class="fas fa-shopping-cart ml-1"></i>
 
-				<a href= "{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
+					<a href= "{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
 					Remove from cart
 					<i class="fas fa-shopping-cart ml-1"></i>
 				</a>

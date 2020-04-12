@@ -41,14 +41,25 @@ def remove_from_cart(request,slug):
         #check if order item is in the order
         if order.items.filter(item__slug = item.slug).exists:
 
-            order_item = OrderItem.objects.filter(
-                item=item, 
-                user=request.user,
-                ordered=False
-            )[0]
+            try:
 
-            order.items.remove(order_item)
-            order_item.delete()
+
+                order_item = OrderItem.objects.filter(
+                    item=item, 
+                    user=request.user,
+                    ordered=False
+                )[0]
+                order.items.remove(order_item)
+                order_item.delete()
+            except IndexError:
+                messages.info(request, "Nothing is in your Order: Add an Item to your Order before removing!")
+            except:
+                messages.info(request, "Internal error...redirecting")
+                return redirect("book_detail", slug=slug)
+
+            
+           # order.items.remove(order_item)
+           # order_item.delete()
             messages.info(request, "This item was removed from your cart.")
             return redirect("book_detail", slug=slug)
 
