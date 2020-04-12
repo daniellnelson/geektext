@@ -46,10 +46,13 @@ class Book(models.Model):
 
     slug = models.SlugField(max_length=150, unique=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     #with slugs
     """def get_absolute_url(self):
 =======
+=======
+>>>>>>> parent of 22b1b11... Committing before merging with Master
     #sluggy = models.SlugField(max_length=120, unique=True)
     
     def get_absolute_url(self):
@@ -79,11 +82,14 @@ class Book(models.Model):
             'id': self.id
         })
     
+<<<<<<< HEAD
     def get_remove_from_cart_url(self):
         return reverse("remove-from-cart", kwargs={
             'id': self.id
         })
     
+=======
+>>>>>>> parent of 22b1b11... Committing before merging with Master
 
 
 
