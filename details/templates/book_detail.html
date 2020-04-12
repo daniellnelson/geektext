@@ -53,11 +53,13 @@
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
 		   <!--Use this when the author model and view are situated-->
-		   {% comment %}
-
-		   <p><a href="{% url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
 		   
-			{% endcomment %}
+
+		  {% comment %} 
+		  <p><a href="{% url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p> 
+		  {% endcomment %}
+		   
+			
 		   <p>Written By:  <a>{{book.author}}</a></p> 
 	        <div class="contents_overview">
 		          {% if book.synopsis%}
