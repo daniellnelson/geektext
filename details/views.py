@@ -19,7 +19,17 @@ def book_detail(request, id):
         book = Book.objects.get(id=id)
     except Book.DoesNotExist:
         raise Http404('Book Not Found')
-    return render(request, 'book_detail.html', {'book': book})
+    return render(request, 'book_detail.html', {'book': books})
+
+def author_books(request, id):
+    try: 
+        author = Author.objects.get(id=id)  
+        books = Book.objects.filter(author=author) 
+    except Author.DoesNotExist:
+        raise Http404('Author Not Found')
+    return render(request, 'author_books.html', {'books': books})
+
+
 
 #New Class-based Views
 

@@ -58,9 +58,9 @@ def item_list(request):
     return render(request, "checkout.html", context)
 
 @login_required
-def remove_from_cart(request,slug):
+def remove_from_cart(request,id):
     #getting the item
-    item = get_object_or_404(Book, slug=slug)
+    item = get_object_or_404(Book, id=id)
 
     order_qs = Order.objects.filter(
         user=request.user,
@@ -73,7 +73,7 @@ def remove_from_cart(request,slug):
         order = order_qs[0] #grab that shit
 
         #check if order item is in the order
-        if order.items.filter(item__slug = item.slug).exists:
+        if order.items.filter(item__id = item.id).exists:
             try:
                 order_item = OrderItem.objects.filter(
                     item=item, 
@@ -86,25 +86,25 @@ def remove_from_cart(request,slug):
                 messages.info(request, "Nothing is in your Order: Add an Item to your Order before removing!")
             except:
                 messages.info(request, "Internal error...redirecting")
-                return redirect("book_detail", slug=slug)
+                return redirect("book_detail", id=id)
 
             messages.info(request, "This item was removed from your cart.")
-            return redirect("book_detail", slug=slug)
+            return redirect("book_detail", id=id)
 
         else:
             #add a message saying the order does not contain the item
             messages.info(request, "This order does not contain the item!")
-            return redirect("book_detail", slug=slug)
+            return redirect("book_detail", id=id)
 
     else:
         #add a message saying the user does have an order
         messages.info(request, "You do not have an order!")
-        return redirect("book_detail", slug=slug)
+        return redirect("book_detail", id=id)
 
 
 @login_required
-def add_to_cart(request, slug):
-    item = get_object_or_404(Book, slug=slug)
+def add_to_cart(request, id):
+    item = get_object_or_404(Book, id=id)
     order_item, created = OrderItem.objects.get_or_create(item=item, 
             user=request.user,
              ordered=False)
@@ -116,7 +116,7 @@ def add_to_cart(request, slug):
         print("-----ORDER EXISTS-----")
         order = order_qs[0]
         #check if order item is in the order
-        if order.items.filter(item__slug = item.slug).exists:
+        if order.items.filter(item__id = item.id).exists:
             print("ORDER ITEM FILTER EXISTS")
             order_item.quantity += 1
             print("QUANTITY UPDATED TO", order_item.quantity)      
@@ -127,7 +127,7 @@ def add_to_cart(request, slug):
             messages.info(request, "This item quantity has been updated")
             for item in order.items.all() :
                 print("ADD-TO-CART FUNC: Current Order", item)
-            return redirect("book_detail", slug=slug)
+            return redirect("book_detail", id=id)
 
         else:
             print("ADDING TO A NEW ORDER")          
@@ -136,7 +136,7 @@ def add_to_cart(request, slug):
             messages.info(request, "This item has been added to your cart")
             for item in order.items.all():
                 print("ADD-TO-CART FUNC: Current Order", item)
-            return redirect("book_detail", slug=slug)
+            return redirect("book_detail", id=id)
 
         
 
@@ -154,10 +154,10 @@ def add_to_cart(request, slug):
 
         
         messages.info(request, "This item has been added to your cart")
-        return redirect("book_detail", slug=slug)
+        return redirect("book_detail", id=id)
         
         
-    return redirect("book_detail", slug=slug)
+    return redirect("book_detail", id=id)
 
 
 

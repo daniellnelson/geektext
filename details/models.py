@@ -44,8 +44,8 @@ class Book(models.Model):
     #added  by Ferris
     slug = models.SlugField(max_length=150, unique=True)
     
-    
-    def get_absolute_url(self):
+    #with slugs
+    """def get_absolute_url(self):
         return reverse("book_detail", kwargs={
             'slug': self.slug
         })
@@ -58,6 +58,22 @@ class Book(models.Model):
     def get_remove_from_cart_url(self):
         return reverse("remove-from-cart", kwargs={
             'slug': self.slug
+        })"""
+
+    #with ids
+    def get_absolute_url(self):
+        return reverse("book_detail", kwargs={
+            'id': self.id
+        })
+
+    def get_add_to_cart_url(self):
+        return reverse("add-to-cart", kwargs={
+            'id': self.id
+        })
+    
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'id': self.id
         })
     
     #FIX ME: GENERATING UNIQUE SLUG USING MANUALLY ADDED SLUG IN ADMIN FOR TIMEBEING

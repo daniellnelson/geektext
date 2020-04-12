@@ -25,34 +25,20 @@
 </div>
 <div>
 <ul>
-  {% for book in object_list %}
+  {% for book in books %}
   <div class="booktitle">
-    <!--OLD href of book_detail url routing-->
-    <!--<a href="{% url 'book_detail' book.id%}"> -->
-
-    <!-- New href for book_detail url routing-->
-    <a href="{{ book.get_absolute_url }}">
-	</a>
-  <!--OLD href of book_detail url routing-->
-	<!--<a href="{% url 'book_detail' book.id %}">-->
-  
-  <!-- New href for book_detail url routing-->
-    <a href="{{ book.get_absolute_url }}">
-    <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
-	</a>
-	<p>{{book.title}}</p>
-	<p>Written By: {{ book.author}}</p>
-	{% if book.genre %}
-	{% endif %}
-	<p class="hidden">{{book.condition }}</p>
-	<p>Price: ${{ book.cost }}</p>
-
-	<a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
-					Add to Cart!
-					<i class="fas fa-shopping-cart ml-1"></i>
-				</a>
-  
-  <a href="{% url 'add_to_list' book.id %}"><button>Add to Wishlist</Button></a>
+		<a href="{% url 'book_detail' book.id%}">
+		<img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
+		</a>
+		<p>{{ book.title }}</p>
+		<p>Written By: {{ book.author.firstName }} {{ book.author.lastName }}</p>
+		{% if book.genre %}
+		{% endif %}
+		<p class="hidden">{{ book.condition }}</p>
+		<p>Average Rating: {% include 'rating.html' %}</p>
+		<p>Price: ${{ book.cost}}</p>
+		<button>Add to Cart</Button>
+		<a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
   </div>
   {% endfor %}
 </ul>

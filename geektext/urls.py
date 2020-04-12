@@ -31,18 +31,18 @@ urlpatterns = [
 
     #url(r'^$', views.home, name ='home'),
     #previous url pattern for book details
-    #url(r'^details/(\d+)/', views.book_detail, name='book_detail'), 
+    url(r'^details/(\d+)/', views.book_detail, name='book_detail'), 
     #url(r'^shopping_cart/', cart_views.item_list, name = 'item-list'),
 
     url(r'^admin/', admin.site.urls),
     #current url pattern for book detials and home
 
-    path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
+    #path('book_detail/<id>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
     path('', HomeView.as_view(), name='home'),
     path('shopping_cart/', CartView.as_view(), name='item-list'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
-    path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
-    path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
+    path('add-to-cart/<id>/', add_to_cart, name='add-to-cart'),
+    path('remove-from-cart/<id>/', remove_from_cart, name='remove-from-cart'),
 
     
     url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
