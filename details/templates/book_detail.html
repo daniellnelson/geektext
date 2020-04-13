@@ -55,12 +55,12 @@
 		   <!--Use this when the author model and view are situated-->
 		   
 
-		  {% comment %} 
-		  <p><a href="{% url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p> 
-		  {% endcomment %}
+		  
+		  <p><a href="{% url 'author_books' book.author.id %}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p> 
+		  
 		   
 			
-		   <p>Written By:  <a>{{book.author}}</a></p> 
+		   {% comment %} <p>Written By:  <a>{{book.author}}</a></p> {% endcomment %}
 	        <div class="contents_overview">
 		          {% if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
