@@ -5,7 +5,7 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from details.models import Book
 from .models import Review
 from geekprofile.models import Profile
-from Shopping_cart.models import Order, OrderItem, Item
+from Shopping_cart.models import Order, OrderItem
 from .forms import ReviewForm
 
 
@@ -26,10 +26,10 @@ def review(request, id):
             except Review.DoesNotExist:
                 review = Review(book=book, user=request.user)
 
-            #purchased = Order.objects.filter(user=request.user, Order__items=book).exists()
+            ordered = Order.objects.filter(user=request.user, items__item=book).exists()
         else:
+            ordered = False
             review = None
-            #purchased = False
 
         if request.method == 'POST':
             form = ReviewForm(request.POST, instance=review)
@@ -40,7 +40,7 @@ def review(request, id):
         else:
             form = ReviewForm(instance=review)
 
-        return render(request, template_name, {'book': book, 'reviews': reviews, 'form': form})
+        return render(request, template_name, {'book': book, 'reviews': reviews, 'form': form, 'ordered': ordered})
 
 def display_reviews(request, id):
     book = get_object_or_404(Book, id=id)

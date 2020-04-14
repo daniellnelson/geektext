@@ -31,6 +31,7 @@
     <h3>Write a review for {{book.title}}</h3>
   </div>
   {% if user.is_authenticated %}
+  {% if ordered %}
     <div class="form">
       <form method="post" class="col-md-4">
         <h4>Leave a Review</h4>
@@ -64,7 +65,10 @@
         </div>
       </div>
     </form>
-    </div>
+  </div>
+    {% else %}
+        <h4>I'm sorry, you must purchase the book to leave a review</h4>
+    {% endif %}
   {% else %}
   <div class="col-md-4">
     <h4>Must be logged in to review!</h4>
