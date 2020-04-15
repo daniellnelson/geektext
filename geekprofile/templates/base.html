@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>GeekText</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/admin/css/details.css' %}">
+    <style>
+          h1#login{
+          padding-bottom: 10px;
+          }
+         h2.address {
+            margin: 20px 100px;
+         }
+	 p.address{
+           margin: 20px 100px;
+         }
+         h3 {
+           text-align: center;
+         }
+         div.profile_login{
+           margin: 20px 100px;
+           padding:20px;
+         }
+         div.profile_signup{
+           margin: 20px 100px;
+           padding:20px;
+         }
+         button {
+           margin:10px;
+           padding: 5px;
+         }
+         div.address{
+           margin-left: 30px;
+         }
+    </style>
+</head>
+    <div class="logo">
+        <h1>GeekText</h1>
+    </div>
+<div class="topnav">
+	<a href="{% url 'home' %}">Home</a>
+	<a>Search</a>
+	<a href="{% url 'item-list' %}">Shopping Cart</a>
+	<a href="{% url 'all_wish_list'%}">Wish List</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'profile_logout' %}">Log out </a> | <a href = "{% url 'profile_detail' %}">{{ user.username }}</a>
+  {% else %}
+    <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
+  {% endif %}
+</div>
+    <body>
+      {% if messages %}
+        <ul class = "messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="alert-{{ message.tags }}"{% endif %}>
+            {{ message }}
+           </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      {% block content %} {% endblock %}
+    </body>
+</html>

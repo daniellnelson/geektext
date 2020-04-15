@@ -23,7 +23,7 @@
 		<a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
 	{% endif %}
 </div>
-{%for book in books|slice:":1"%}
+{% for book in books|slice:":1" %}
 	<h2> {{book.author.firstName|capfirst }} {{book.author.lastName|capfirst }} </h2>
 	<p> Age: {{book.author.age}} | Location: {{book.author.location}} </p>
 	<p>About the Author: {{book.author.biography}}<p>
@@ -31,7 +31,7 @@
 	<img src="{{ book.author.pic.url}}" alt="{{ book.title }}"/>
 {% endfor %}
 <ul>
-  {%for book in books%}
+  {% for book in books %}
   <div class="booktitle">
 		<a href="{%url 'book_detail' book.id%}">
 		<img src="{{ book.cover.url}}" alt="{{book.author.firstName|capfirst }} {{book.author.lastName|capfirst }}"/>
@@ -46,5 +46,3 @@
   {% endfor %}
 </ul>
 </html>
-
-	

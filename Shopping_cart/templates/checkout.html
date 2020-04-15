@@ -1,6 +1,5 @@
- 
-
-{% load static %}
+ {% load static %}
+ {% load cart_template_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +8,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Material Design Bootstrap</title>
+  <title>Shopping Cart</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{% static 'https://use.fontawesome.com/releases/v5.11.2/css/all.css' %}">
   <!-- Bootstrap core CSS -->
@@ -27,8 +26,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="{% static 'https://mdbootstrap.com/docs/jquery/' %}" target="_blank">
-        <strong class="blue-text">MDB</strong>
+      <a class="navbar-brand waves-effect" href="{% url 'home' %}" target="_blank">
+        <strong class="orange-text">GT</strong>
       </a>
 
       <!-- Collapse -->
@@ -43,18 +42,18 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link waves-effect" href="{% static '#' %}">Home
+            <a class="nav-link waves-effect" href="{% url 'home' %}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% static 'https://mdbootstrap.com/docs/jquery/' %}" target="_blank">About MDB</a>
+            <a class="nav-link waves-effect" href="{% url 'profile_detail' %}" target="_blank">Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% static 'https://mdbootstrap.com/docs/jquery/getting-started/download/' %}" target="_blank">Free download</a>
+            <a class="nav-link waves-effect" href="{% url 'item-list'%}" target="_blank">Shopping Cart</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% static 'https://mdbootstrap.com/education/bootstrap/' %}" target="_blank">Free tutorials</a>
+            <a class="nav-link waves-effect" href="{% url 'all_wish_list' %}" target="_blank"> Wish List</a>
           </li>
         </ul>
 
@@ -62,7 +61,7 @@
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
             <a class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> 1 </span>
+              <span class="badge red z-depth-1 mr-1"> {{request.user|cart_item_count}} </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
             </a>
@@ -78,10 +77,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{% static 'https://github.com/mdbootstrap/bootstrap-material-design' %}" class="nav-link border border-light rounded waves-effect"
-              target="_blank">
-              <i class="fab fa-github mr-2"></i>MDB GitHub
-            </a>
+          {% comment %} FIX LINK! {% endcomment %}
+            
           </li>
         </ul>
 
@@ -97,7 +94,7 @@
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">Checkout form</h2>
+      <h2 class="my-5 h2 text-center">Cart</h2>
 
       <!--Grid row-->
       <div class="row">
@@ -108,6 +105,7 @@
           <!--Card-->
           <div class="card">
 
+            {% comment %}
             <!--Card content-->
             <form class="card-body">
 
@@ -279,6 +277,7 @@
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 
             </form>
+            {% endcomment %}
 
           </div>
           <!--/.Card-->
@@ -286,52 +285,104 @@
         </div>
         <!--Grid column-->
 
-        <!--Grid column-->
-        <div class="col-md-4 mb-4">
+        <!--Grid column YOUR CART!-->
+        {% comment %}<div class="col-md-4 mb-4">{% endcomment %}
+
+        <!--Cart Alerts!-->
+        <div class="mt-9 pt-4">	
+            {% if messages %}			
+                {% for message in messages %}
+
+                
+                <div class="alert alert-{{ message.tags }} alert-dissmissable" role="alert">
+                <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+              
+                    {{ message }}
+                    
+                </div>
+                {% endfor %}
+            {% endif %}			
+        </div>
+	<!--Cart Alerts!-->
+
+
+        <div class="container">
+        </div>
+        <div class="col-md-9 mb-5">
 
           <!-- Heading -->
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span class="badge badge-secondary badge-pill">{{request.user|cart_item_count}}</span>
           </h4>
 
+          <div class="container">
+
+
+          
+          </div>
+
           <!-- Cart -->
-          <ul class="list-group mb-3 z-depth-1">
+          <div class="row">
+               <ul class="list-group mb-3 z-depth-1">
+            {% for order_item in object.items.all %}
             <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+              <div class= >
+                <h6 class="my-0">{{ order_item.item.title }}</h6>
+                <small class="text-muted">Quantity: {{ order_item.quantity }}</small>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted">${{ order_item.item.cost }}</span>
+                <a href="{{ order_item.item.get_add_to_cart_url }}"><button>Add to Cart</Button></a>
+                <a href="{{ order_item.item.get_remove_from_cart_cart_url }}"><button>Remove from Cart</Button></a>
+                <a href="{{ order_item.item.get_remove_from_cart_url }}"><button>Save</Button></a>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
+            {% endfor %}
             <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
+              
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong>$ {{ object.get_total }} </strong>
             </li>
           </ul>
-          <!-- Cart -->
+          
+          </div>
+          <!-- End of Cart -->
 
+          <!-- Heading -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Save for Later</span>
+            <span class="badge badge-secondary badge-pill"> {{request.user|cart_item_count}} </span>
+          </h4>
+
+          <div class="container">
+
+
+          
+          </div>
+
+          <!-- Save for Later -->
+          <div class="row">
+               <ul class="list-group mb-3 z-depth-1">
+            {% for order_item in object.items.all %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div class= >
+                <h6 class="my-0">{{ order_item.item.title }}</h6>
+                <small class="text-muted">Quantity: {{ order_item.quantity }}</small>
+              </div>
+              <span class="text-muted">${{ order_item.item.cost }}</span>
+                <a href="{{ order_item.item.get_add_to_cart_cart_url }}"><button>Add to Cart</Button></a>
+                <a href="{{ order_item.item.get_remove_from_cart_url }}"><button>Remove from Cart</Button></a>
+                <a href="{{ order_item.item.get_remove_from_cart_url }}"><button> Save </Button></a>
+              </a>
+            </li>
+            {% endfor %}
+          
+          </div>
+
+          
+
+          {% comment %}
           <!-- Promo code -->
           <form class="card p-2">
             <div class="input-group">
@@ -342,6 +393,9 @@
             </div>
           </form>
           <!-- Promo code -->
+          {% endcomment %}
+
+
 
         </div>
         <!--Grid column-->
@@ -356,16 +410,7 @@
   <!--Footer-->
   <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
-    <!--Call to action-->
-    <div class="pt-4">
-      <a class="btn btn-outline-white" href="{% static 'https://mdbootstrap.com/docs/jquery/getting-started/download/' %}" target="_blank" role="button">Download MDB
-        <i class="fas fa-download ml-2"></i>
-      </a>
-      <a class="btn btn-outline-white" href="{% static 'https://mdbootstrap.com/education/bootstrap/' %}" target="_blank" role="button">Start free tutorial
-        <i class="fas fa-graduation-cap ml-2"></i>
-      </a>
-    </div>
-    <!--/.Call to action-->
+    
 
     <hr class="my-4">
 
@@ -407,8 +452,8 @@
 
     <!--Copyright-->
     <div class="footer-copyright py-3">
-      © 2019 Copyright:
-      <a href="{% static 'https://mdbootstrap.com/education/bootstrap/' %}" target="_blank"> MDBootstrap.com </a>
+      © 2020 Copyright: CEN4010 GROUP 15
+      {% comment %}<a href="{% static 'https://mdbootstrap.com/education/bootstrap/' %}" target="_blank"> MDBootstrap.com </a>{% endcomment %}
     </div>
     <!--/.Copyright-->
 

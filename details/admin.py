@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Book, Author
+from .models import Book
 
-
-@admin.register(Book,Author)
+@admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['title', 'cover', 'author','genre', 'condition', 'type', 'cost', 'pages','slug']
+    prepopulated_fields = {"slug": ("title",)}

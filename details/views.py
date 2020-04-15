@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import Http404
-
+from django.views.generic import ListView, DetailView
+from django.shortcuts import reverse
 from .models import Book
-from .models import Author
+
+
+#Old Function-based views
+
 
 def home(request):
     books = Book.objects.all()
@@ -23,3 +27,29 @@ def author_books(request, id):
     except Author.DoesNotExist:
         raise Http404('Author Not Found')
     return render(request, 'author_books.html', {'books': books})
+
+
+
+#New Class-based Views
+
+#make a DetailView for the Author
+
+class HomeView(ListView):
+    model = Book
+    template_name = 'home.html'
+    
+class BookView(DetailView):
+    model = Book
+    template_name = 'book_detail.html'
+
+
+
+
+    
+
+
+  
+
+
+   
+    
