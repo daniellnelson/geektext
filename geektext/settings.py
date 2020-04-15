@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'geekprofile',
     'Shopping_cart',
     'ratings',
-    #'crispy_forms'
 
 ]
 
@@ -137,8 +136,3 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = '/login'
-
-
-#CRISPY FORMS
-
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
