@@ -1,6 +1,66 @@
-<h1>{{user.profile|capfirst}}</h1>
-<a href = "{% url 'home' %}" >Home</a>
-<p>Email: {{user.email}}</p>
-<p>Nickname: {{user.profile.nickname}}</p>
-<p>Address: {{user.profile.home_address}}</p>
-<p>Credit Card Number: {{user.profile.creditcard.number}}</p>
+{% extends "base.html" %}
+
+{% block content %}
+     <div class=address>
+        <h1 id = "login">{{user.profile|capfirst}}</h1>
+        <form action="{% url 'profile_edit' %}" >
+          {% csrf_token %}
+          <button method="post" type='submit'>
+            Edit
+          </button>
+        </form>
+        <form action="{% url 'profile_password' %}" >
+          {% csrf_token %}
+          <button method="post" type='submit'>
+            Change Password
+          </button>
+        </form>
+    </div>
+    <div class=address>
+      <hr>
+        <p>Username : {{user.username}} </p>
+        <p>Email: {{user.email}}</p>
+        <p>Nickname: {{user.profile.nickname}}</p>
+        <hr>
+    </div>
+    <div class=address>
+        <h2 class = address>Home Addresses:</h2>
+        {%for address in user.profile.home_address.all %}
+          {% if address.address_type == 'home' %}
+            <p>Address: {{address.street_addr}}</p>
+            <p>Apt / Suite / Unit: {{address.apt_suite_unit}}</p>
+            <p>City: {{address.city}}</p>
+            <p>State: {{address.state}}</p>
+            <p>Zipcode: {{address.zipcode}}</p>
+          {% endif %}
+        <hr>
+        {%endfor%}
+    </div>
+    <div class=address>
+        <h2 class=address>Shipping Addresses:</h2>
+        {%for address in user.profile.home_address.all %}
+          {% if address.address_type == 'shipping' %}
+            <p>Address: {{address.street_addr}}</p>
+            <p>Apt / Suite / Unit: {{address.apt_suite_unit}}</p>
+            <p>City: {{address.city}}</p>
+            <p>State: {{address.state}}</p>
+            <p>Zipcode: {{address.zipcode}}</p>
+          {% endif %}
+        <hr>
+        {%endfor%}
+    </div>
+    <div class=address>
+        <h2 class= address>Credit Cards</h2>
+        <form action = "{% url 'profile_cards' %}">
+          <button method = "POST" type="submit">
+            Add/Edit Cards
+          </button>
+        </form>
+        {% for card in context %}
+        <hr>
+            <p>Credit Card Number: {{card}}</p>
+            <p>Expires: {{card.expire}}</p>
+        <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

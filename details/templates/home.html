@@ -38,7 +38,7 @@
 		<p>Average Rating: {% include 'rating.html' %}</p>
 		<p>Price: ${{ book.cost}}</p>
 		<button>Add to Cart</Button>
-		<button>Add to Wishlist</Button>
+		<a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
   </div>
   {% endfor %}
 </ul>

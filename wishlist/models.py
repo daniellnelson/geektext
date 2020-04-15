@@ -8,3 +8,6 @@ class Wishlist(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     books = models.ManyToManyField(Book, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
+
+    def __str__(self):
+        return self.listname
