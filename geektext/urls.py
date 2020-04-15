@@ -23,7 +23,11 @@ from Shopping_cart.views import (
     CartView,
     OrderSummaryView,
     add_to_cart,
-    remove_from_cart
+    add_to_cart_home,
+    remove_from_cart,
+    add_to_cart_cart_view,
+    remove_from_cart_home,
+    remove_from_cart_view
 )
 
 
@@ -38,7 +42,7 @@ urlpatterns = [
     #current url pattern for book detials and home
 
     path('book_detail/<slug>/', BookView.as_view(template_name = 'book_detail.html'), name='book_detail'),
-    url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
+    #url(r'^details/authors/(\d+)/', views.author_books, name='author_books'),
 
     url(r'^details/review/(\d+)/', ratings_views.review, name = 'write_review'),
     url(r'^details/review/all/(\d+)/', ratings_views.display_reviews, name = 'display_reviews'),
@@ -48,7 +52,13 @@ urlpatterns = [
     path('shopping_cart/', CartView.as_view(), name='item-list'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('add-to-cart/<slug>/', add_to_cart, name='add-to-cart'),
+    path('add-to-cart-home/<slug>/', add_to_cart_home, name='add-to-cart-home'),
+    path('add-to-cart/<slug>/', add_to_cart_cart_view, name='add-to-cart-cart'),
+
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove-from-cart'),
+    path('remove-from-cart-home/<slug>/', remove_from_cart_home, name='remove-from-cart-home'),
+    path('remove-from-cart/<slug>/', remove_from_cart_view, name='remove-from-cart-cart'),
+
 
 
     url(r'^login/', auth_views.LoginView.as_view(template_name = 'login.html'), name = 'profile_login'),

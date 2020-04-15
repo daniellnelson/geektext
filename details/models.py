@@ -51,8 +51,28 @@ class Book(models.Model):
             'slug': self.slug
         })
     
+    def get_add_to_cart_home_url(self):
+        return reverse("add-to-cart-home", kwargs={
+            'slug': self.slug
+        })
+
+    def get_add_to_cart_cart_url(self):
+        return reverse("add-to-cart-cart", kwargs={
+            'slug': self.slug
+        })
+    
     def get_remove_from_cart_url(self):
         return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+    def get_remove_from_cart_home_url(self):
+        return reverse("remove-from-cart-home", kwargs={
+            'slug': self.slug
+        })
+    
+    def get_remove_from_cart_cart_url(self):
+        return reverse("remove-from-cart-cart", kwargs={
             'slug': self.slug
         })
     

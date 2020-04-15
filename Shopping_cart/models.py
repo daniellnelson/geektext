@@ -51,7 +51,7 @@ class OrderItem(models.Model):
         return f"{self.quantity} of {self.item.title}"
     
     def get_total_item_price(self):
-        return self.quantity * self.item.price
+        return self.quantity * self.item.cost
 
     
 
@@ -76,5 +76,7 @@ class Order(models.Model):
     def get_total(self):
         total = 0
         for order_item in self.items.all():
-            total += order_item.get_final_price()  
-        return total
+            total += order_item.get_total_item_price()
+
+        formatted_float = "{:.2f}".format(total)  
+        return formatted_float

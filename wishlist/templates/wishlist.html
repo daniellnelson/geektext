@@ -38,7 +38,6 @@
     <p>Created on: {{ list.created }}</p>
       {% for book in list.books.all %}
         <ul>
-          {% comment %}<li><a href="{% url 'book_detail' book.id %}">{{ book.title }}</a></li>{% endcomment %}
           <li><a href="{% url 'book_detail' book.slug %}">{{ book.title }}</a></li>
         </ul>
       {% empty %}

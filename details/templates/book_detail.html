@@ -53,14 +53,12 @@
       <div class="contents">
 	       <h3> {{book.title|capfirst }}</h3>
 		   <!--Use this when the author model and view are situated-->
-		   
+		   {% comment %}
 
-		  
-		  <p><a href="{% url 'author_books' book.author.id %}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p> 
-		  
+		   <p><a href="{% url 'author_books' book.author.id%}"> Written By: {{book.author.firstName}} {{book.author.lastName}}</a></p>
 		   
-			
-		   {% comment %} <p>Written By:  <a>{{book.author}}</a></p> {% endcomment %}
+			{% endcomment %}
+		   <p>Written By:  <a>{{book.author}}</a></p> 
 	        <div class="contents_overview">
 		          {% if book.synopsis%}
 			           <p>Overview: {{book.synopsis}}</p>
@@ -87,14 +85,10 @@
 
 				  <p>Average Rating: {% include 'rating.html' %}</p>
 
-				  <a href= "{{ object.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p">
-					Add to Cart!
-					<i class="fas fa-shopping-cart ml-1"></i>
 
-					<a href= "{{ object.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p">
-					Remove from cart
-					<i class="fas fa-shopping-cart ml-1"></i>
-				</a>
+				<a href="{{ object.get_add_to_cart_url }}"><button class="contents_clicker">Add to Cart</Button></a>
+				<a href="{{ object.get_remove_from_cart_url }}"><button class="contents_clicker">Remove from Cart</Button></a>
+
               <a href="{% url 'add_to_list' book.id %}"><button class="contents_clicker">Add to Wishlist</Button></a>
 					{% if user.is_authenticated %}
 						<h5><a href="{%url 'write_review' book.id%}">Create Customer Review</a></h5>

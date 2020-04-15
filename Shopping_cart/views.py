@@ -58,7 +58,8 @@ def item_list(request):
     return render(request, "checkout.html", context)
 
 @login_required
-def remove_from_cart(request,slug):
+def remove_from_cart_view(request,slug):
+    page = "shopping_cart"
     #getting the item
     item = get_object_or_404(Book, slug=slug)
 
@@ -86,24 +87,127 @@ def remove_from_cart(request,slug):
                 messages.info(request, "Nothing is in your Order: Add an Item to your Order before removing!")
             except:
                 messages.info(request, "Internal error...redirecting")
-                return redirect("book_detail", slug=slug)
+                return redirect(page)
 
             messages.info(request, "This item was removed from your cart.")
-            return redirect("book_detail", slug=slug)
+            return redirect(page)
 
         else:
             #add a message saying the order does not contain the item
             messages.info(request, "This order does not contain the item!")
-            return redirect("book_detail", slug=slug)
+            return redirect(page)
 
     else:
         #add a message saying the user does have an order
         messages.info(request, "You do not have an order!")
-        return redirect("book_detail", slug=slug)
+        return redirect(page)
+
+
+
+@login_required
+def remove_from_cart_home(request,slug):
+    page = "home"
+
+    #getting the item
+    item = get_object_or_404(Book, slug=slug)
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    #checking if the user has an order
+    if order_qs.exists(): #if they do
+
+        order = order_qs[0] #grab that shit
+
+        #check if order item is in the order
+        if order.items.filter(item__slug = item.slug).exists:
+            try:
+                order_item = OrderItem.objects.filter(
+                    item=item, 
+                    user=request.user,
+                    ordered=False
+                )[0]
+                order.items.remove(order_item)
+                order_item.delete()
+            except IndexError:
+                messages.info(request, "Nothing is in your Order: Add an Item to your Order before removing!")
+            except:
+                messages.info(request, "Internal error...redirecting")
+                return redirect(page)
+
+            messages.info(request, "This item was removed from your cart.")
+            return redirect(page)
+
+        else:
+            #add a message saying the order does not contain the item
+            messages.info(request, "This order does not contain the item!")
+            return redirect(page)
+
+    else:
+        #add a message saying the user does have an order
+        messages.info(request, "You do not have an order!")
+        return redirect(page)
+
+@login_required
+def remove_from_cart(request,slug):
+    page = "book_detail"
+
+    #getting the item
+    item = get_object_or_404(Book, slug=slug)
+
+    order_qs = Order.objects.filter(
+        user=request.user,
+        ordered=False
+    )
+
+    #checking if the user has an order
+    if order_qs.exists(): #if they do
+
+        order = order_qs[0] #grab that shit
+
+        #check if order item is in the order
+        if order.items.filter(item__slug = item.slug).exists:
+            try:
+                order_item = OrderItem.objects.filter(
+                    item=item, 
+                    user=request.user,
+                    ordered=False
+                )[0]
+                order.items.remove(order_item)
+                order_item.delete()
+            except IndexError:
+                messages.info(request, "Nothing is in your Order: Add an Item to your Order before removing!")
+            except:
+                messages.info(request, "Internal error...redirecting")
+                return redirect(page, slug=slug)
+
+            messages.info(request, "This item was removed from your cart.")
+            return redirect(page, slug=slug)
+
+        else:
+            #add a message saying the order does not contain the item
+            messages.info(request, "This order does not contain the item!")
+            return redirect(page, slug=slug)
+
+    else:
+        #add a message saying the user does have an order
+        messages.info(request, "You do not have an order!")
+        return redirect(page, slug=slug)
+
+
+
+
+
+
+
+
 
 
 @login_required
 def add_to_cart(request, slug):
+    page = "book_detail"
     item = get_object_or_404(Book, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(item=item, 
             user=request.user,
@@ -158,6 +262,125 @@ def add_to_cart(request, slug):
         
         
     return redirect("book_detail", slug=slug)
+
+
+@login_required
+def add_to_cart_home(request, slug):
+    page = "home"
+    item = get_object_or_404(Book, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(item=item, 
+            user=request.user,
+             ordered=False)
+
+    #check for order
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+
+    if order_qs.exists():
+        print("-----ORDER EXISTS-----")
+        order = order_qs[0]
+        #check if order item is in the order
+        if order.items.filter(item__slug = item.slug).exists:
+            print("ORDER ITEM FILTER EXISTS")
+            order_item.quantity += 1
+            print("QUANTITY UPDATED TO", order_item.quantity)      
+            order_item.save()
+            print("ORDER ITEM SAVED")
+            order.items.add(order_item)
+            print("ADDED TO ORDER")  
+            messages.info(request, "This item quantity has been updated")
+            for item in order.items.all() :
+                print("ADD-TO-CART FUNC: Current Order", item)
+            return redirect("home")
+
+        else:
+            print("ADDING TO A NEW ORDER")          
+            order.items.add(order_item)
+            print("ORDER ITEM ADDED WITH QUERYSET EXIST: ", order_item)
+            messages.info(request, "This item has been added to your cart")
+            for item in order.items.all():
+                print("ADD-TO-CART FUNC: Current Order", item)
+            return redirect("home")
+
+        
+
+    else:
+        print("NO ORDER EXISTS---CREATING ORDER")
+        ordered_date = timezone.now()
+
+        order = Order.objects.create(user=request.user,
+                                    ordered_date=ordered_date)
+        print("ORDER CREATED")   
+        order.items.add(order_item)
+
+        print("ORDER ITEM ADDED QUERYSET DIDNT EXIST: ", order_item)
+        print("ADD-TO-CART FUNC: Current Order", order)
+
+        
+        messages.info(request, "This item has been added to your cart")
+        return redirect("home")
+        
+        
+    return redirect("home")
+
+
+
+@login_required
+def add_to_cart_cart_view(request, slug):
+    page = "shopping_cart"
+    item = get_object_or_404(Book, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(item=item, 
+            user=request.user,
+             ordered=False)
+
+    #check for order
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+
+    if order_qs.exists():
+        print("-----ORDER EXISTS-----")
+        order = order_qs[0]
+        #check if order item is in the order
+        if order.items.filter(item__slug = item.slug).exists:
+            print("ORDER ITEM FILTER EXISTS")
+            order_item.quantity += 1
+            print("QUANTITY UPDATED TO", order_item.quantity)      
+            order_item.save()
+            print("ORDER ITEM SAVED")
+            order.items.add(order_item)
+            print("ADDED TO ORDER")  
+            messages.info(request, "This item quantity has been updated")
+            for item in order.items.all() :
+                print("ADD-TO-CART FUNC: Current Order", item)
+            return redirect(page)
+
+        else:
+            print("ADDING TO A NEW ORDER")          
+            order.items.add(order_item)
+            print("ORDER ITEM ADDED WITH QUERYSET EXIST: ", order_item)
+            messages.info(request, "This item has been added to your cart")
+            for item in order.items.all():
+                print("ADD-TO-CART FUNC: Current Order", item)
+            return redirect(page)
+
+        
+
+    else:
+        print("NO ORDER EXISTS---CREATING ORDER")
+        ordered_date = timezone.now()
+
+        order = Order.objects.create(user=request.user,
+                                    ordered_date=ordered_date)
+        print("ORDER CREATED")   
+        order.items.add(order_item)
+
+        print("ORDER ITEM ADDED QUERYSET DIDNT EXIST: ", order_item)
+        print("ADD-TO-CART FUNC: Current Order", order)
+
+        
+        messages.info(request, "This item has been added to your cart")
+        return redirect(page)
+        
+        
+    return redirect(page)
 
 
 

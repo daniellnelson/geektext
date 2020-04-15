@@ -23,6 +23,23 @@
     <a href="{% url 'profile_login' %}">Log In </a> | <a href = "{% url 'profile_signup' %}" > Sign Up</a>
   {% endif %}
 </div>
+
+<!--Cart Alerts!-->
+	<div class="mt-9 pt-4">	
+			{% if messages %}			
+    			{% for message in messages %}
+
+					
+					<div class="alert alert-{{ message.tags }} alert-dissmissable" role="alert">
+					<span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+				
+  						{{ message }}
+						  
+					</div>
+    			{% endfor %}
+			{% endif %}			
+	</div>
+	<!--Cart Alerts!-->
 <div>
 <ul>
   {% for book in object_list %}
@@ -37,7 +54,8 @@
 	<!--<a href="{% url 'book_detail' book.id %}">-->
   
   <!-- New href for book_detail url routing-->
-    <a href="{{ book.get_absolute_url }}">
+   {% comment %} <a href="{{ book.get_absolute_url }}">{% endcomment %}
+   <a href="{% url 'book_detail' book.slug %}">
     <img src="{{ book.cover.url}}" alt="{{ book.title }}"/>
 	</a>
 	<p>{{book.title}}</p>
@@ -54,6 +72,8 @@
 					<i class="fas fa-shopping-cart ml-1"></i>
 				</a>
   {% endcomment %}
+  <a href="{{ book.get_add_to_cart_home_url }}"><button>Add to Cart</Button></a>
+  <a href="{{ book.get_remove_from_cart_home_url }}"><button>Remove from Cart</Button></a>
   <a href="{% url 'add_to_list' book.id %}"><button>Add to Wishlist</Button></a>
   </div>
   {% endfor %}
